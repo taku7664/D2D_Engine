@@ -26,7 +26,10 @@ namespace Resource
 		Sprite2D(const std::wstring& _path, SpriteData _data);
 		virtual ~Sprite2D();
 
-		ID2D1Bitmap* GetSprite(int _index = 0) { return m_spriteSheet[_index]; }
+		ID2D1Bitmap* GetSprite(int _index = 0) 
+		{
+			return m_spriteSheet[_index];
+		}
 
 	protected:
 

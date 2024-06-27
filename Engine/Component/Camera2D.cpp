@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "Camera2D.h"
 #include "Transform2D.h"
-#include "../../World/Object/Object.h"
-#include "../../World/Scene/Manager/SceneManager.h"
-#include "../../Render/D2DRender.h"
+#include "../World/Object/Object.h"
+#include "../World/Scene/Manager/SceneManager.h"
+#include "../Render/D2DRender.h"
 
 Camera2D::Camera2D()
     : viewportPosition({ 0.f,0.f }),

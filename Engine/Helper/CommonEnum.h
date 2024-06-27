@@ -43,7 +43,7 @@ enum class ComponentType
 	Transform2D,
 	TextureRenderer,
 	SpriteRenderer2D,
-	AnimationRenderer,
+	Animator2D,
 	Camera,
 	Script,
 	SIZE,

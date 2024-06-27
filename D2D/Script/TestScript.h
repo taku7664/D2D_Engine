@@ -12,6 +12,6 @@ public:
 
 	void Update()
 	{
-		gameobject->transform->rotation += Time::deltaTime;
+		//gameobject->transform->scale.x += Time::deltaTime;
 	}
 };

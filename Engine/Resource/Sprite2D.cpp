@@ -6,9 +6,9 @@ Resource::Sprite2D::Sprite2D(const std::wstring& _path, SpriteData _data)
 {
     type = ResourceType::Sprite2D;
     m_key = _path;
+    m_spriteData = _data;
 
     ID2D1Bitmap* tempTexture = nullptr;
-    D2D1_SIZE_F textureSize;
 
     if (_path.empty()) // 파일경로 없을 시 예외
         assert(false && "FilePath_is_Empty");
@@ -47,7 +47,7 @@ Resource::Sprite2D::Sprite2D(const std::wstring& _path, SpriteData _data)
     hr = D2DRender::GetRenderTarget()->CreateBitmapFromWicBitmap(converter, nullptr, &tempTexture);
     if (FAILED(hr)) assert(false);
 
-    textureSize = tempTexture->GetSize();
+    D2D1_SIZE_F textureSize = tempTexture->GetSize();
 
     // 스프라이트 데이터를 자르고 m_spriteSheet에 추가
     int rows = static_cast<int>(m_spriteData.cut_by_grid.y);
@@ -59,8 +59,8 @@ Resource::Sprite2D::Sprite2D(const std::wstring& _path, SpriteData _data)
         for (int x = 0; x < cols; ++x)
         {
             D2D1_RECT_F rect;
-            rect.left = m_spriteData.offset.left + x * (textureSize.width / cols + m_spriteData.margin.x);
-            rect.top = m_spriteData.offset.top + y * (textureSize.height / rows + m_spriteData.margin.y);
+            rect.left = m_spriteData.offset.left + x * (textureSize.width / cols + m_spriteData.margin.x * cols);
+            rect.top = m_spriteData.offset.top + y * (textureSize.height / rows + m_spriteData.margin.y * rows);
             rect.right = rect.left + (textureSize.width / cols);
             rect.bottom = rect.top + (textureSize.height / rows);
 
@@ -91,15 +91,12 @@ Resource::Sprite2D::Sprite2D(const std::wstring& _path, SpriteData _data)
 
             bitmapRenderTarget->Release();
         }
-
-        // 파일을 사용할 때마다 다시 만든다.
-        if (converter) converter->Release();
-        if (decoder) decoder->Release();
-        if (pFrame) pFrame->Release();
-        if (tempTexture) tempTexture->Release();
-
-        m_spriteData = _data;
     }
+    // 파일을 사용할 때마다 다시 만든다.
+    if (converter) converter->Release();
+    if (decoder) decoder->Release();
+    if (pFrame) pFrame->Release();
+    if (tempTexture) tempTexture->Release();
 }
 
 Resource::Sprite2D::~Sprite2D()

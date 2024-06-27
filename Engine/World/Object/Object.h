@@ -3,7 +3,7 @@
 #include "../../Component/Camera2D.h"
 #include "../../Component/Script.h"
 #include "../../Component/Rednerer/SpriteRenderer2D.h"
-#include "../../Component/Rednerer/AnimationRenderer.h"
+#include "../../Component/Rednerer/Animator2D.h"
 
 class Component;
 class Layer;

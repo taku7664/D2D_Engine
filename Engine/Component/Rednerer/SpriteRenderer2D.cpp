@@ -27,6 +27,7 @@ void SpriteRenderer2D::Draw(Camera2D* _camera)
 	renderTarget->SetTransform(
 		Transform2D::TranslateMatrix(-size.width * 0.5, -size.height * 0.5) *
 		tr->GetWorldMatrix() *
+		Transform2D::TranslateMatrix(size.width * 0.5, size.height * 0.5) *
 		_camera->CameraMatrix());
 
 	renderTarget->DrawBitmap(bitmap);

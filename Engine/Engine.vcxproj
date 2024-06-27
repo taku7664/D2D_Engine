@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Component\Camera2D.h" />
-    <ClInclude Include="Component\Rednerer\AnimationRenderer.h" />
+    <ClInclude Include="Component\Rednerer\Animator2D.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Helper\CommonEnum.h" />
     <ClInclude Include="Component\Rednerer\Renderer.h" />
@@ -170,7 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component\Camera2D.cpp" />
-    <ClCompile Include="Component\Rednerer\AnimationRenderer.cpp" />
+    <ClCompile Include="Component\Rednerer\Animator2D.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\Rednerer\Renderer.cpp" />
     <ClCompile Include="Helper\Input\Input.cpp" />
@@ -196,9 +196,6 @@
     <ClCompile Include="Component\Script.cpp" />
     <ClCompile Include="Resource\Sprite2D.cpp" />
     <ClCompile Include="Component\Rednerer\SpriteRenderer2D.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Engine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

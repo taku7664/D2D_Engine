@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Script.h"
-#include "../../World/Object/Object.h"
+#include "../World/Object/Object.h"
 
 Script::Script()
 {
