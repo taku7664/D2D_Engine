@@ -58,7 +58,7 @@ void D2DRender::EndDraw()
 	m_renderTarget->EndDraw();
 }
 
-void D2DRender::UnInitialize()
+void D2DRender::Release()
 {
 	if (m_factory) m_factory->Release();
 	if (m_imgFactory) m_imgFactory->Release();

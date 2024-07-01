@@ -137,6 +137,7 @@
     <ClInclude Include="Contents.h" />
     <ClInclude Include="DemoApp.h" />
     <ClInclude Include="Scene\MainTitle.h" />
+    <ClInclude Include="Script\CameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">

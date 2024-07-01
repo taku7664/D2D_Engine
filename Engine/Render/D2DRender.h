@@ -7,7 +7,7 @@ public:
 	static void Initialize(HWND _hwnd);
 	static void BeginDraw();
 	static void EndDraw();
-	static void UnInitialize();
+	static void Release();
 
 	static HWND GetHWND() { return m_hwnd; }
 	static ID2D1Factory* GetFactory() { return m_factory; }

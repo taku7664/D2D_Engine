@@ -4,6 +4,17 @@
 Scene*				 SceneManager::m_activeScene = nullptr;
 std::vector<Scene*>  SceneManager::m_sceneList[(int)LayerType::SIZE]{};
 
+void SceneManager::Release()
+{
+	for (int i = 0; i < (int)LayerType::SIZE; i++)
+	{
+		for (Scene* scene : m_sceneList[i])
+		{
+			delete scene;
+		}
+	}
+}
+
 void SceneManager::FixedUpdate()
 {
 	if (m_activeScene)

@@ -26,7 +26,10 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-    delete[] m_layerList;
+    for (Layer* layer : m_layerList)
+    {
+        delete layer;
+    }
 }
 
 Object* Scene::CreateObject(LayerType _type, ObjectTag _tag, std::string _name)

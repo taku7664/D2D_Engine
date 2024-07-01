@@ -27,7 +27,7 @@ void MainTitle::SceneLoad()
 		clone = CreateObject(LayerType::Defalut, ObjectTag::Defalut, "Background");
 		clone->transform->position = { 100, 200 };
 		SpriteRenderer2D* sp = clone->AddComponent<SpriteRenderer2D>();
-		sp->bitmap =  ResourceManager::GetSprite2D(L"S_BackGroud")->GetSprite();
+		sp->bitmap = ResourceManager::GetSprite2D(L"S_BackGroud")->GetSprite();
 	}
 	// 애니메이션 테스트용 캐릭터
 	{
@@ -42,6 +42,7 @@ void MainTitle::SceneLoad()
 	// 이러면 총 메인카메라 + 서브카메라로 총 화면에 2대가 있다.
 	{
 		clone = CreateObject(LayerType::Defalut, ObjectTag::Camera, "SubCamera");
+		clone->AddComponent<CameraController>();
 		Camera2D* ca = clone->AddComponent<Camera2D>();
 		ca->SetBackGroundColor(D2D1::ColorF(D2D1::ColorF::Gray));
 		ca->viewportPosition = { 500, 50 };

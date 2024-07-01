@@ -13,11 +13,14 @@ void GameApp::Initialize(HINSTANCE _hinstance, int _width, int _height, const wc
 void GameApp::Run()
 {
 	MSG msg;
-
 	while (true)
 	{
-		while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
+			if (msg.message == WM_KEYDOWN || msg.message == WM_KEYUP)
+			{
+				Input::GetKey(msg);
+			}
 			if (msg.message == WM_QUIT)
 			{
 				break;
@@ -28,18 +31,26 @@ void GameApp::Run()
 				DispatchMessage(&msg);
 			}
 		}
-		Time::Update();
-		FixedUpdate();
-		EarlyUpdate();
-		Update();
-		LateUpdate();
-		StateUpdate();
-		Render();
+		else
+		{
+			Time::Update();
+			Input::Update();
+			FixedUpdate();
+			EarlyUpdate();
+			Update();
+			LateUpdate();
+			StateUpdate();
+			Render();
+			Input::ResetKey();
+		}
 	}
 }
 
-void GameApp::UnInitialize()
+void GameApp::Release()
 {
+	D2DRender::Release();
+	SceneManager::Release();
+	Debug.Close_Console();
 }
 
 void GameApp::FixedUpdate()

@@ -5,6 +5,8 @@ class SceneManager
 {
 public:
 
+	static void Release();
+
 	static void FixedUpdate();
 	static void EarlyUpdate();
 	static void Update();

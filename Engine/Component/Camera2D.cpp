@@ -77,8 +77,18 @@ void Camera2D::Render()
 D2D1_MATRIX_3X2_F Camera2D::CameraMatrix()
 {
     D2D1_MATRIX_3X2_F cameraMatrix;
+    RECT rc;
+
+    GetClientRect(D2DRender::GetHWND(), &rc);
+    D2D_SIZE_F res = { rc.right - rc.left, rc.bottom - rc.top };
+
+    cameraMatrix = Transform2D::TranslateMatrix(
+        (-res.width) / 2, (-res.height) / 2) *
+        GetOwner()->transform->GetWorldMatrix() *
+        Transform2D::TranslateMatrix(
+            (res.width) / 2, (res.height) / 2);
+    /*D2D1_MATRIX_3X2_F cameraMatrix;
     cameraMatrix = GetOwner()->transform->GetWorldMatrix();
-    D2D1InvertMatrix(&cameraMatrix);
-    //cameraMatrix = Transform2D::GetOffSetMatrix(-viewportSize.width) * cameraMatrix;
+    D2D1InvertMatrix(&cameraMatrix);*/
     return cameraMatrix;
 }

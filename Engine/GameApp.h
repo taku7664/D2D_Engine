@@ -12,7 +12,7 @@ public:
 
 	void Run();
 
-	void UnInitialize();
+	void Release();
 
 protected:
 

@@ -14,7 +14,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     App.Initialize(hInstance, SCREEN_WIDTH, SCREEN_HEIGHT, TITLE);
     App.Run();
-    App.UnInitialize();
+    App.Release();
 
     return 0;
 }
