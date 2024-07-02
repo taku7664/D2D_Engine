@@ -11,6 +11,6 @@ public:
 	~DemoApp() {}
 
 	virtual void Initialize(HINSTANCE _hinstance, int _width, int _height, const wchar_t* _title) final;
-	void LoadScene();
+	void LoadWorld();
 
 };

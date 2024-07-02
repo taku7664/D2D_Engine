@@ -12,7 +12,7 @@ Script::~Script()
 {
 }
 
-void Script::Destroy(Object* _scene)
+void Script::Destroy(Object* _World)
 {
-	_scene->SetState(GameState::Destroy);
+	_World->SetState(GameState::Destroy);
 }

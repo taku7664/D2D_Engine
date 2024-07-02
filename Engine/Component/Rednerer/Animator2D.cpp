@@ -47,7 +47,7 @@ void Animator2D::Update()
 void Animator2D::Draw(Camera2D* _camera)
 {
 	ID2D1BitmapRenderTarget* renderTarget = _camera->GetBitmapRenderTarget();
-	Transform2D* tr = m_owner->GetComponent<Transform2D>();
+	Transform2D* tr = m_owner->transform;
 
 	if (m_activeAnimation == nullptr)
 		return;

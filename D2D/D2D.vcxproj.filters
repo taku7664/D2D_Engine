@@ -21,7 +21,7 @@
     <ClCompile Include="Main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\MainTitle.cpp">
+    <ClCompile Include="World\MainTitle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Script\TestScript.h">
@@ -32,7 +32,7 @@
     <ClInclude Include="DemoApp.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\MainTitle.h">
+    <ClInclude Include="World\MainTitle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Contents.h">

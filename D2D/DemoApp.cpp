@@ -3,12 +3,12 @@
 void DemoApp::Initialize(HINSTANCE _hinstance, int _width, int _height, const wchar_t* _title)
 {
 	__super::Initialize(_hinstance, _width, _height, _title);
-	LoadScene();
+	LoadWorld();
 }
 
-void DemoApp::LoadScene()
+void DemoApp::LoadWorld()
 {
-	SceneManager::CreateScene<MainTitle>("Title", SceneTag::Title);
-	SceneManager::LoadScene("Title");
+	WorldManager::CreateWorld<MainTitle>("Title", WorldTag::Title);
+	WorldManager::LoadWorld("Title");
 }
 

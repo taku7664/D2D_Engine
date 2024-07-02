@@ -1,7 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "Render/D2DRender.h"
-#include "World/Scene/Manager/SceneManager.h"
+#include "World/Manager/WorldManager.h"
 #include "Resource/Manager/ResourceManager.h"
 
 class GameApp

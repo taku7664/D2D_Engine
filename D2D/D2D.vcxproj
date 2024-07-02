@@ -130,13 +130,13 @@
   <ItemGroup>
     <ClCompile Include="DemoApp.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Scene\MainTitle.cpp" />
+    <ClCompile Include="World\MainTitle.cpp" />
     <ClCompile Include="Script\TestScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Contents.h" />
     <ClInclude Include="DemoApp.h" />
-    <ClInclude Include="Scene\MainTitle.h" />
+    <ClInclude Include="World\MainTitle.h" />
     <ClInclude Include="Script\CameraController.h" />
   </ItemGroup>
   <ItemGroup>

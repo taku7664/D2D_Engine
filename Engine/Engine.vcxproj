@@ -143,6 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="World\Object\Widget\Widget.h" />
+    <ClInclude Include="World\Object\Widget\Text\InputText.h" />
+    <ClInclude Include="World\Object\Widget\Text\DynamicText.h" />
+    <ClInclude Include="World\Object\Actor\Actor.h" />
     <ClInclude Include="Component\Camera2D.h" />
     <ClInclude Include="Component\Rednerer\Animator2D.h" />
     <ClInclude Include="Component\Component.h" />
@@ -160,8 +164,8 @@
     <ClInclude Include="Resource\Animation2D.h" />
     <ClInclude Include="Resource\Manager\ResourceManager.h" />
     <ClInclude Include="Resource\Resource2D.h" />
-    <ClInclude Include="World\Scene\Manager\SceneManager.h" />
-    <ClInclude Include="World\Scene\Scene.h" />
+    <ClInclude Include="World\Manager\WorldManager.h" />
+    <ClInclude Include="World\World.h" />
     <ClInclude Include="World\Object\Object.h" />
     <ClInclude Include="Component\Transform2D.h" />
     <ClInclude Include="Component\Script.h" />
@@ -169,6 +173,10 @@
     <ClInclude Include="Component\Rednerer\SpriteRenderer2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="World\Object\Widget\Widget.cpp" />
+    <ClCompile Include="World\Object\Widget\Text\InputText.cpp" />
+    <ClCompile Include="World\Object\Widget\Text\DynamicText.cpp" />
+    <ClCompile Include="World\Object\Actor\Actor.cpp" />
     <ClCompile Include="Component\Camera2D.cpp" />
     <ClCompile Include="Component\Rednerer\Animator2D.cpp" />
     <ClCompile Include="Component\Component.cpp" />
@@ -189,8 +197,8 @@
     <ClCompile Include="Resource\Animation2D.cpp" />
     <ClCompile Include="Resource\Manager\ResourceManager.cpp" />
     <ClCompile Include="Resource\Resource2D.cpp" />
-    <ClCompile Include="World\Scene\Manager\SceneManager.cpp" />
-    <ClCompile Include="World\Scene\Scene.cpp" />
+    <ClCompile Include="World\Manager\WorldManager.cpp" />
+    <ClCompile Include="World\World.cpp" />
     <ClCompile Include="World\Object\Object.cpp" />
     <ClCompile Include="Component\Transform2D.cpp" />
     <ClCompile Include="Component\Script.cpp" />

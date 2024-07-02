@@ -75,16 +75,28 @@
     <ClInclude Include="Helper\Utillity.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="World\Scene\Scene.h">
+    <ClInclude Include="World\World.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="World\Scene\Manager\SceneManager.h">
+    <ClInclude Include="World\Manager\WorldManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="World\Layer\Layer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Component\Rednerer\Animator2D.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="World\Object\Actor\Actor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="World\Object\Widget\Text\DynamicText.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="World\Object\Widget\Text\InputText.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="World\Object\Widget\Widget.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,10 +152,10 @@
     <ClCompile Include="Helper\Math\Math.h">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="World\Scene\Scene.cpp">
+    <ClCompile Include="World\World.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="World\Scene\Manager\SceneManager.cpp">
+    <ClCompile Include="World\Manager\WorldManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="World\Layer\Layer.cpp">
@@ -153,6 +165,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Component\Rednerer\Animator2D.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="World\Object\Actor\Actor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="World\Object\Widget\Text\DynamicText.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="World\Object\Widget\Text\InputText.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="World\Object\Widget\Widget.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,7 +2,7 @@
 #include "Camera2D.h"
 #include "Transform2D.h"
 #include "../World/Object/Object.h"
-#include "../World/Scene/Manager/SceneManager.h"
+#include "../World/Manager/WorldManager.h"
 #include "../Render/D2DRender.h"
 
 Camera2D::Camera2D()
@@ -41,15 +41,15 @@ void Camera2D::Render()
     // 메인 렌더타겟을 받아온다.
     ID2D1HwndRenderTarget* mainRenderTarget = D2DRender::GetRenderTarget();
 
-    // ActiveScene에서 m_cullingLayer가 false인 레이어만 순회해서 해당 오브젝트의 Draw를 호출 (여기서 Render메소드는 현재 Camera*를 매개변수로 받는다.)
-    Scene* activeScene = SceneManager::GetActiveScene();
+    // ActiveWorld에서 m_cullingLayer가 false인 레이어만 순회해서 해당 오브젝트의 Draw를 호출 (여기서 Render메소드는 현재 Camera*를 매개변수로 받는다.)
+    World* activeWorld = WorldManager::GetActiveWorld();
 
     for (int i = 0; i < (int)LayerType::SIZE; i++)
     {
         if (!m_cullingLayer[i])
         {
             // 레이어를 정렬할 수 있으므로 혹시 몰라 레이어 복사병합
-            std::vector<Object*> tempList = Utillity.MergeVectors(activeScene->GetLayerList()[i]->GetObjectList(), activeScene->GetDontDestroyLayer()[i]->GetObjectList());
+            std::vector<Object*> tempList = Utillity.MergeVectors(activeWorld->GetLayerList()[i]->GetObjectList(), activeWorld->GetPersistentLayers()[i]->GetObjectList());
             for (Object*& obj : tempList)
             {
                 if (!m_cullingTag[(int)obj->GetTag()])
@@ -83,12 +83,10 @@ D2D1_MATRIX_3X2_F Camera2D::CameraMatrix()
     D2D_SIZE_F res = { rc.right - rc.left, rc.bottom - rc.top };
 
     cameraMatrix = Transform2D::TranslateMatrix(
-        (-res.width) / 2, (-res.height) / 2) *
-        GetOwner()->transform->GetWorldMatrix() *
+        (-res.width) / 2, (-res.height) / 2) * // 중심축 이동
+        GetOwner()->transform->GetWorldMatrix() *  // 행렬 연산
         Transform2D::TranslateMatrix(
-            (res.width) / 2, (res.height) / 2);
-    /*D2D1_MATRIX_3X2_F cameraMatrix;
-    cameraMatrix = GetOwner()->transform->GetWorldMatrix();
-    D2D1InvertMatrix(&cameraMatrix);*/
+            (res.width) / 2, (res.height) / 2); // 원상태로 복귀
+
     return cameraMatrix;
 }

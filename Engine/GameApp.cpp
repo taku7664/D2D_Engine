@@ -49,7 +49,7 @@ void GameApp::Run()
 void GameApp::Release()
 {
 	D2DRender::Release();
-	SceneManager::Release();
+	WorldManager::Release();
 	Debug.Close_Console();
 }
 
@@ -59,7 +59,7 @@ void GameApp::FixedUpdate()
 	deltaCount += Time::deltaTime;
 	while (deltaCount >= 0.02f)
 	{
-		SceneManager::FixedUpdate();
+		WorldManager::FixedUpdate();
 		deltaCount -= 0.02f;
 	}
 }
@@ -67,29 +67,29 @@ void GameApp::FixedUpdate()
 void GameApp::EarlyUpdate()
 {
     Input::Update();
-	SceneManager::EarlyUpdate();
+	WorldManager::EarlyUpdate();
 }
 
 void GameApp::Update()
 {
-	SceneManager::Update();
+	WorldManager::Update();
 }
 
 void GameApp::LateUpdate()
 {
-	SceneManager::LateUpdate();
+	WorldManager::LateUpdate();
 	Input::ResetKey();
 }
 
 void GameApp::StateUpdate()
 {
-	SceneManager::StateUpdate();
+	WorldManager::StateUpdate();
 }
 
 void GameApp::Render()
 {
 	D2DRender::BeginDraw();
-	SceneManager::Render();
+	WorldManager::Render();
 	D2DRender::EndDraw();
 }
 

@@ -17,65 +17,65 @@ Layer::~Layer()
 
 void Layer::FixedUpdate()
 {
-	for (Object*& obj : m_objectList)
+	for (int i = 0; i < m_objectList.size(); i++)
 	{
-		if (obj->GetState() == GameState::Active)
+		if (m_objectList[i]->GetState() == GameState::Active)
 		{
-			obj->FixedUpdate();
+			m_objectList[i]->FixedUpdate();
 		}
 	}
 }
 
 void Layer::EarlyUpdate()
 {
-	for (Object*& obj : m_objectList)
+	for (int i = 0; i < m_objectList.size(); i++)
 	{
-		if (obj->GetState() == GameState::Active)
+		if (m_objectList[i]->GetState() == GameState::Active)
 		{
-			obj->EarlyUpdate();
+			m_objectList[i]->EarlyUpdate();
 		}
 	}
 }
 
 void Layer::Update()
 {
-	for (Object*& obj : m_objectList)
+	for (int i = 0; i < m_objectList.size(); i++)
 	{
-		if (obj->GetState() == GameState::Active)
+		if (m_objectList[i]->GetState() == GameState::Active)
 		{
-			obj->Update();
+			m_objectList[i]->Update();
 		}
 	}
 }
 
 void Layer::LateUpdate()
 {
-	for (Object*& obj : m_objectList)
+	for (int i = 0; i < m_objectList.size(); i++)
 	{
-		if (obj->GetState() == GameState::Active)
+		if (m_objectList[i]->GetState() == GameState::Active)
 		{
-			obj->LateUpdate();
+			m_objectList[i]->LateUpdate();
 		}
 	}
 }
 
 void Layer::Render()
 {
-	for (Object*& obj : m_objectList)
+	for (int i = 0; i < m_objectList.size(); i++)
 	{
-		if (obj->GetState() == GameState::Active)
+		if (m_objectList[i]->GetState() == GameState::Active)
 		{
-			obj->Render();
+			m_objectList[i]->Render();
 		}
 	}
 }
 
 void Layer::StateUpdate()
 {
-	SearchDestroy(m_objectList);
+	ProcessDestroy(m_objectList);
 }
 
-void Layer::SearchDestroy(std::vector<Object*>& _objList)
+void Layer::ProcessDestroy(std::vector<Object*>& _objList)
 {
 	for (auto iter = _objList.begin(); iter != _objList.end(); )
 	{
@@ -86,10 +86,12 @@ void Layer::SearchDestroy(std::vector<Object*>& _objList)
 		}
 		else
 		{
-			if (!(*iter)->GetChild().empty())
+			// Actor클래스면 자식검사도 해봐야한다
+			Actor* actor = dynamic_cast<Actor*>(*iter);
+			if (actor && !actor->GetChild().empty())
 			{
 				// 재귀로 자식의 자식 접근
-				SearchDestroy((*iter)->GetChild());
+				ProcessDestroy(actor->GetChild());
 			}
 			++iter;
 		}

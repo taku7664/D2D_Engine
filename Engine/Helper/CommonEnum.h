@@ -8,7 +8,7 @@ enum class GameState
 	Destroy,
 };
 
-enum class SceneTag
+enum class WorldTag
 {
 	Default,
 	Load,
