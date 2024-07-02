@@ -8,7 +8,7 @@ class Layer
 {
 public:
 
-	Layer(LayerType _type);
+	Layer(LayerTag _type);
 	~Layer();
 
 	void FixedUpdate();
@@ -19,12 +19,12 @@ public:
 	void StateUpdate();
 	void ProcessDestroy(std::vector<Object*>& _objList);
 
-	LayerType GetLayerType() { return m_layerType; }
+	LayerTag GetLayerTag() { return m_layerTag; }
 	std::vector<Object*>& GetObjectList() { return m_objectList; }
 
 private:
 
-	LayerType m_layerType;
+	LayerTag m_layerTag;
 	std::vector<Object*> m_objectList;
 };
 

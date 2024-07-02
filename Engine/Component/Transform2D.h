@@ -22,12 +22,9 @@ public:
 	D2D1_MATRIX_3X2_F GetLocalMatrix() { return m_localMatrix; }
 	D2D1_MATRIX_3X2_F GetWorldMatrix() { return m_worldMatrix; }
 
-	static D2D1_MATRIX_3X2_F GetCenterMatrix(int _wid, int _hei);
-	static D2D1_MATRIX_3X2_F GetCenterMatrix(float _wid, float _hei);
-	static D2D1_MATRIX_3X2_F GetCenterMatrix(D2D_VECTOR_2F _size);
-	static D2D1_MATRIX_3X2_F GetOffSetMatrix(D2D_VECTOR_2F _offset);
-
 	static D2D1_MATRIX_3X2_F TranslateMatrix(float _wid, float _hei);
+	static D2D1_MATRIX_3X2_F RotationMatrix(float _rotation);
+	static D2D1_MATRIX_3X2_F ScaleMatrix(float _xScale, float _yScale);
 
 	void LookAt(Transform2D* _target);
 

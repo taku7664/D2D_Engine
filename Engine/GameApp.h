@@ -3,6 +3,7 @@
 #include "Render/D2DRender.h"
 #include "World/Manager/WorldManager.h"
 #include "Resource/Manager/ResourceManager.h"
+#include "Physics/Manager/CollisionManager.h"
 
 class GameApp
 {

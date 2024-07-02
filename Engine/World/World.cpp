@@ -1,26 +1,26 @@
 #include "pch.h"
 #include "World.h"
 
-Layer* World::m_persistentLayers[(int)LayerType::SIZE] = { nullptr };
+Layer* World::m_persistentLayers[(int)LayerTag::SIZE] = { nullptr };
 
 World::World()
     : m_WorldTag(WorldTag::Default)
 {
     if (m_persistentLayers[0] == nullptr)
     {
-        for (int i = 0; i < (int)LayerType::SIZE; i++)
+        for (int i = 0; i < (int)LayerTag::SIZE; i++)
         {
-            m_persistentLayers[i] = new Layer((LayerType)i);
+            m_persistentLayers[i] = new Layer((LayerTag)i);
         }
     }
 
-    for (int i = 0; i < (int)LayerType::SIZE; i++)
+    for (int i = 0; i < (int)LayerTag::SIZE; i++)
     {
-        m_layers[i] = new Layer((LayerType)i);
+        m_layers[i] = new Layer((LayerTag)i);
     }
 
     // 메인카메라 생성
-    Actor* camera = CreateObject<Actor>("Main_Camera", LayerType::Defalut, ObjectTag::Camera);
+    Actor* camera = CreateObject<Actor>("Main_Camera", LayerTag::Defalut, ObjectTag::Camera);
     camera->AddComponent<Camera2D>();
 }
 
@@ -42,7 +42,7 @@ void World::Release()
 
 void World::FixedUpdate()
 {
-    for (int i = 0; i < (int)LayerType::SIZE; i++)
+    for (int i = 0; i < (int)LayerTag::SIZE; i++)
     {
         if (m_layers[i]) 
             m_layers[i]->FixedUpdate();
@@ -53,7 +53,7 @@ void World::FixedUpdate()
 
 void World::EarlyUpdate()
 {
-    for (int i = 0; i < (int)LayerType::SIZE; i++)
+    for (int i = 0; i < (int)LayerTag::SIZE; i++)
     {
         if (m_layers[i])
             m_layers[i]->EarlyUpdate();
@@ -64,7 +64,7 @@ void World::EarlyUpdate()
 
 void World::Update()
 {
-    for (int i = 0; i < (int)LayerType::SIZE; i++)
+    for (int i = 0; i < (int)LayerTag::SIZE; i++)
     {
         if (m_layers[i])
             m_layers[i]->Update();
@@ -75,7 +75,7 @@ void World::Update()
 
 void World::LateUpdate()
 {
-    for (int i = 0; i < (int)LayerType::SIZE; i++)
+    for (int i = 0; i < (int)LayerTag::SIZE; i++)
     {
         if (m_layers[i])
             m_layers[i]->LateUpdate();
@@ -86,7 +86,7 @@ void World::LateUpdate()
 
 void World::StateUpdate()
 {
-    for (int i = 0; i < (int)LayerType::SIZE; i++)
+    for (int i = 0; i < (int)LayerTag::SIZE; i++)
     {
         if (m_layers[i])
             m_layers[i]->StateUpdate();
@@ -97,7 +97,7 @@ void World::StateUpdate()
 
 void World::Render()
 {
-    for (int i = 0; i < (int)LayerType::SIZE; i++)
+    for (int i = 0; i < (int)LayerTag::SIZE; i++)
     {
         if (m_layers[i])
             m_layers[i]->Render();

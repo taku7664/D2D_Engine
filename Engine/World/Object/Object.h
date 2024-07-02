@@ -3,7 +3,7 @@
 
 class Layer;
 
-class Object
+class Object abstract
 {
 public:
 
@@ -22,22 +22,24 @@ public:
 	void		SetState(GameState _state) { m_state = _state; }
 	void		SetParent(Object* _parent) { m_parent = _parent; };
 	void        SetLayerOwner(Layer* _layer) { m_ownerLayer = _layer; }
-	ObjectTag	GetTag() { return m_tag; }
+
+	Layer*		GetLayerOwner() { return m_ownerLayer; }
+	Object*		GetParent() { return m_parent; }
 	std::string GetName() { return m_name; }
-	Layer*      GetLayerOwner() { return m_ownerLayer; }
+	ObjectTag	GetTag() { return m_tag; }
+	ObjectType  GetType() { return m_type; }
 	GameState	GetState() { return m_state; }
-	Object*     GetParent() { return m_parent; }
 
 	Transform2D* transform;
 
 protected:
 
-	Object* m_parent;
-	std::string m_name;
-	ObjectTag m_tag;
-	GameState m_state;
+	Object*		    m_parent;
+	Layer*		    m_ownerLayer;
 
-	Layer* m_ownerLayer;
-
+	std::string		m_name;
+	ObjectTag		m_tag;
+	ObjectType		m_type;
+	GameState		m_state;
 };
 

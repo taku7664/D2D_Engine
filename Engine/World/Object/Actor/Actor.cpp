@@ -4,6 +4,7 @@
 Actor::Actor(std::string _name, ObjectTag _tag)
 	: Object(_name, _tag)
 {
+	m_type = ObjectType::Actor;
 	m_componentList->clear();
 	m_child.clear();
 	transform = this->AddComponent<Transform2D>();

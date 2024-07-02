@@ -44,7 +44,7 @@ void Camera2D::Render()
     // ActiveWorld에서 m_cullingLayer가 false인 레이어만 순회해서 해당 오브젝트의 Draw를 호출 (여기서 Render메소드는 현재 Camera*를 매개변수로 받는다.)
     World* activeWorld = WorldManager::GetActiveWorld();
 
-    for (int i = 0; i < (int)LayerType::SIZE; i++)
+    for (int i = 0; i < (int)LayerTag::SIZE; i++)
     {
         if (!m_cullingLayer[i])
         {
@@ -82,7 +82,8 @@ D2D1_MATRIX_3X2_F Camera2D::CameraMatrix()
     GetClientRect(D2DRender::GetHWND(), &rc);
     D2D_SIZE_F res = { rc.right - rc.left, rc.bottom - rc.top };
 
-    cameraMatrix = Transform2D::TranslateMatrix(
+    cameraMatrix = 
+        Transform2D::TranslateMatrix(
         (-res.width) / 2, (-res.height) / 2) * // 중심축 이동
         GetOwner()->transform->GetWorldMatrix() *  // 행렬 연산
         Transform2D::TranslateMatrix(

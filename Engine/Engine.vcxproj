@@ -143,6 +143,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Physics\Manager\CollisionManager.h" />
+    <ClInclude Include="Component\Collider\BoxCollider2D.h" />
+    <ClInclude Include="Component\Collider\CircleCollider2D.h" />
+    <ClInclude Include="Component\Collider\Collider.h" />
+    <ClInclude Include="Component\Rednerer\RectRenderer.h" />
     <ClInclude Include="World\Object\Widget\Widget.h" />
     <ClInclude Include="World\Object\Widget\Text\InputText.h" />
     <ClInclude Include="World\Object\Widget\Text\DynamicText.h" />
@@ -173,6 +178,11 @@
     <ClInclude Include="Component\Rednerer\SpriteRenderer2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Physics\Manager\CollisionManager.cpp" />
+    <ClCompile Include="Component\Collider\BoxCollider2D.cpp" />
+    <ClCompile Include="Component\Collider\CircleCollider2D.cpp" />
+    <ClCompile Include="Component\Collider\Collider.cpp" />
+    <ClCompile Include="Component\Rednerer\RectRenderer.cpp" />
     <ClCompile Include="World\Object\Widget\Widget.cpp" />
     <ClCompile Include="World\Object\Widget\Text\InputText.cpp" />
     <ClCompile Include="World\Object\Widget\Text\DynamicText.cpp" />

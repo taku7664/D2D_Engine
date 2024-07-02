@@ -66,38 +66,19 @@ D2D_VECTOR_2F Transform2D::WorldScale()
 	}
 }
 
-D2D1_MATRIX_3X2_F Transform2D::GetCenterMatrix(int _wid, int _hei)
-{
-	D2D1::Matrix3x2F center = D2D1::Matrix3x2F::Translation(_wid / 2, _hei / 2);
-	D2D1InvertMatrix(&center);
-	return center;
-}
-
-D2D1_MATRIX_3X2_F Transform2D::GetCenterMatrix(float _wid, float _hei)
-{
-	D2D1::Matrix3x2F center = D2D1::Matrix3x2F::Translation(_wid / 2, _hei / 2);
-	D2D1InvertMatrix(&center);
-	return center;
-}
-
-D2D1_MATRIX_3X2_F Transform2D::GetCenterMatrix(D2D_VECTOR_2F _size)
-{
-	D2D1::Matrix3x2F center = D2D1::Matrix3x2F::Translation(_size.x / 2, _size.y / 2);
-	D2D1InvertMatrix(&center);
-	return center;
-}
-
-D2D1_MATRIX_3X2_F Transform2D::GetOffSetMatrix(D2D_VECTOR_2F _offset)
-{
-	D2D1::Matrix3x2F offset = D2D1::Matrix3x2F::Translation(_offset.x / 2, _offset.y / 2);
-	//D2D1InvertMatrix(&offset);
-	return offset;
-}
-
 D2D1_MATRIX_3X2_F Transform2D::TranslateMatrix(float _wid, float _hei)
 {
-	D2D1::Matrix3x2F center = D2D1::Matrix3x2F::Translation(_wid, _hei);
-	return center;
+	return D2D1::Matrix3x2F::Translation(_wid, _hei);
+}
+
+D2D1_MATRIX_3X2_F Transform2D::RotationMatrix(float _rotation)
+{
+	return  D2D1::Matrix3x2F::Rotation(_rotation);
+}
+
+D2D1_MATRIX_3X2_F Transform2D::ScaleMatrix(float _xScale, float _yScale)
+{
+	return D2D1::Matrix3x2F::Scale(D2D1::SizeF(_xScale, _yScale));
 }
 
 void Transform2D::LookAt(Transform2D* _target)

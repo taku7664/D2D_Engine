@@ -2,11 +2,11 @@
 #include "WorldManager.h"
 
 World*				 WorldManager::m_activeWorld = nullptr;
-std::vector<World*>  WorldManager::m_WorldList[(int)LayerType::SIZE]{};
+std::vector<World*>  WorldManager::m_WorldList[(int)LayerTag::SIZE]{};
 
 void WorldManager::Release()
 {
-	for (int i = 0; i < (int)LayerType::SIZE; i++)
+	for (int i = 0; i < (int)LayerTag::SIZE; i++)
 	{
 		for (World* World : m_WorldList[i])
 		{

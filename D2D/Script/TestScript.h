@@ -8,10 +8,11 @@ private:
 
 public:
 
-	float RotationSpeed = 1.f;
-
 	void Update()
 	{
-		//gameobject->transform->scale.x += Time::deltaTime;
+		if (Input::KeyHold(KeyType::SPACEBAR))
+		{
+			gameobject->transform->rotation += 90 * Time::deltaTime;
+		}
 	}
 };

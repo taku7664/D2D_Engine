@@ -8,6 +8,7 @@ void GameApp::Initialize(HINSTANCE _hinstance, int _width, int _height, const wc
 		assert(false && "Fail - InitializeWindow");
 	D2DRender::Initialize(hwnd);
 	Time::Initialize();
+	Debug.Get_Console();
 }	
 
 void GameApp::Run()
@@ -59,6 +60,7 @@ void GameApp::FixedUpdate()
 	deltaCount += Time::deltaTime;
 	while (deltaCount >= 0.02f)
 	{
+		CollisionManager::FixedUpdate();
 		WorldManager::FixedUpdate();
 		deltaCount -= 0.02f;
 	}

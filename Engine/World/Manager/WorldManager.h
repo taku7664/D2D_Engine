@@ -67,6 +67,6 @@ public:
 private:
 
 	static World* m_activeWorld;
-	static std::vector<World*> m_WorldList[(int)LayerType::SIZE];
+	static std::vector<World*> m_WorldList[(int)LayerTag::SIZE];
 };
 

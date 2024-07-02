@@ -8,19 +8,19 @@ public:
 	void Update()
 	{
 
-		if (Input::KeyHold(KeyType::LEFT))
+		if (Input::KeyHold(LEFT))
 		{
 			gameobject->transform->position.x += 3;
 		}
-		if (Input::KeyHold(KeyType::RIGHT))
+		if (Input::KeyHold(RIGHT))
 		{
 			gameobject->transform->position.x -= 3;
 		}
-		if (Input::KeyHold(KeyType::UP))
+		if (Input::KeyHold(UP))
 		{
 			gameobject->transform->position.y += 3;
 		}
-		if (Input::KeyHold(KeyType::DOWN))
+		if (Input::KeyHold(DOWN))
 		{
 			gameobject->transform->position.y -= 3;
 		}

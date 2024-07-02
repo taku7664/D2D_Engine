@@ -1,10 +1,16 @@
 #pragma once
 #include "../Object.h"
+// ExtraComponent
 #include "../../Component/Transform2D.h"
 #include "../../Component/Camera2D.h"
 #include "../../Component/Script.h"
+// RenderComponent
 #include "../../Component/Rednerer/SpriteRenderer2D.h"
 #include "../../Component/Rednerer/Animator2D.h"
+#include "../../Component/Rednerer/RectRenderer.h"
+// ColliderComponent
+#include "../../Component/Collider/BoxCollider2D.h"
+#include "../../Component/Collider/CircleCollider2D.h"
 
 class Component;
 class Layer;
@@ -56,6 +62,7 @@ public:
 	void		SetActive(bool _val);
 	void		SetDestroy();
 	std::vector<Object*>& GetChild() { return m_child; };
+	std::vector<Component*>& GetComponentList(ComponentType _type) { return m_componentList[(int)_type]; }
 	Actor* GetParent() { return m_parent; }
 
 private:

@@ -17,7 +17,7 @@ enum class WorldTag
 	SIZE,
 };
 
-enum class LayerType
+enum class LayerTag
 {
 	Defalut,
 	Tile,
@@ -38,11 +38,21 @@ enum class ObjectTag
 	SIZE,
 };
 
+enum class ObjectType
+{
+	Actor,
+	DynamicText,
+	InputText,
+	SIZE
+};
+
 enum class ComponentType
 {
 	Transform2D,
-	TextureRenderer,
+	BoxCollider2D,
+	CircleCollider2D,
 	SpriteRenderer2D,
+	RectRenderer,
 	Animator2D,
 	Camera,
 	Script,
@@ -58,7 +68,7 @@ enum class ResourceType
 	SIZE,
 };
 
-enum class KeyType // 키보드
+enum KeyType // 키보드
 {
 	UP = VK_UP,
 	DOWN = VK_DOWN,

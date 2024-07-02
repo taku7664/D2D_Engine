@@ -28,7 +28,7 @@ public:
 
 	template <typename T>
 	T* CreateObject(std::string _name = ""
-		, LayerType _type = LayerType::Defalut
+		, LayerTag _type = LayerTag::Defalut
 		, ObjectTag _tag = ObjectTag::Defalut
 		, bool _isPersistent = false)
 	{
@@ -50,7 +50,7 @@ public:
 	T* FindObject(std::string _name)
 	{
 		T* temp;
-		for (int i = 0; i < (int)LayerType::SIZE; i++)
+		for (int i = 0; i < (int)LayerTag::SIZE; i++)
 		{
 			for (Object* obj : m_persistentLayers[i])
 			{
@@ -81,10 +81,10 @@ public:
 
 private:
 
-	std::string  m_WorldName;
-	WorldTag     m_WorldTag;
+	std::string   m_WorldName;
+	WorldTag      m_WorldTag;
 
-	Layer* m_layers[(int)LayerType::SIZE];
-	static Layer* m_persistentLayers[(int)LayerType::SIZE];
+	Layer*		  m_layers[(int)LayerTag::SIZE];
+	static Layer* m_persistentLayers[(int)LayerTag::SIZE];
 
 };

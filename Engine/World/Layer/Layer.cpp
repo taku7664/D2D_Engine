@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Layer.h"
 
-Layer::Layer(LayerType _type)
-	: m_layerType(_type)
+Layer::Layer(LayerTag _type)
+	: m_layerTag(_type)
 {
 }
 
@@ -88,6 +88,10 @@ void Layer::ProcessDestroy(std::vector<Object*>& _objList)
 		{
 			// Actor클래스면 자식검사도 해봐야한다
 			Actor* actor = dynamic_cast<Actor*>(*iter);
+			if ((*iter)->GetType() == ObjectType::Actor)
+			{
+
+			}
 			if (actor && !actor->GetChild().empty())
 			{
 				// 재귀로 자식의 자식 접근

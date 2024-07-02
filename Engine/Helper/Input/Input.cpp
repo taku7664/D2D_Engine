@@ -5,14 +5,14 @@
 std::vector<short> KeyDown_Reset;
 std::vector<short> KeyUp_Reset;
 
-float		 Input::Horizontal_Axis = 0.f;
-float	 	 Input::Vertical_Axis = 0.f;
-int		 	 Input::Horizontal_AxisRaw = 0;
-int			 Input::Vertical_AxisRaw = 0;
-KeyState	 Input::Key_Code[256]{};
-MouseState	 Input::Cur_Mouse{};
-MouseState	 Input::Pre_Mouse{};
-D2D1_VECTOR_2F Input::mousePosition = { 0,0 };
+float			 Input::Horizontal_Axis = 0.f;
+float	 		 Input::Vertical_Axis = 0.f;
+int		 		 Input::Horizontal_AxisRaw = 0;
+int				 Input::Vertical_AxisRaw = 0;
+KeyState		 Input::Key_Code[256]{};
+MouseState		 Input::Cur_Mouse{};
+MouseState		 Input::Pre_Mouse{};
+D2D1_VECTOR_2F   Input::mousePosition = { 0,0 };
 
 // 누른 키보드 값을 저장합니다.
 void Input::GetKey(MSG msg)
@@ -62,8 +62,6 @@ void Input::Update()
 	POINT pt;
 	GetCursorPos(&pt);
 	ScreenToClient(D2DRender::GetHWND(), &pt);
-	if (SetProcessDPIAware()) {
-	}
 
 	mousePosition = { (float)pt.x , (float)pt.y };
 	Cur_Mouse.Mid = 0;
@@ -108,16 +106,16 @@ void Input::Axis()
 	if (Vertical_Axis >= deltaTime * -1  && Vertical_Axis <= deltaTime * 1) Vertical_Axis = 0.f;
 
 	if (Horizontal_Axis >= -1.f && Horizontal_Axis <= 1.f) {
-		if (KeyHold((int)KeyType::RIGHT)) Horizontal_Axis += deltaTime;
-		else if (KeyHold((int)KeyType::LEFT)) Horizontal_Axis -= deltaTime;
+		if (KeyHold(RIGHT)) Horizontal_Axis += deltaTime;
+		else if (KeyHold(LEFT)) Horizontal_Axis -= deltaTime;
 		else if (Horizontal_Axis != 0.f) Horizontal_Axis += deltaTime * (Horizontal_Axis <= 0 ? 1 : -1);
 	}
 	if (Horizontal_Axis <= -1.f) Horizontal_Axis = -1.f;
 	if (Horizontal_Axis >= 1.f) Horizontal_Axis = 1.f;
 
 	if (Vertical_Axis >= -1.f && Vertical_Axis <= 1.f) {
-		if (KeyHold((int)KeyType::DOWN)) Vertical_Axis += deltaTime;
-		else if (KeyHold((int)KeyType::UP)) Vertical_Axis -= deltaTime;
+		if (KeyHold(DOWN)) Vertical_Axis += deltaTime;
+		else if (KeyHold(UP)) Vertical_Axis -= deltaTime;
 		else if (Vertical_Axis != 0.f) Vertical_Axis += deltaTime * (Vertical_Axis < 0.f ? 1 : -1);
 	}
 	if (Vertical_Axis <= -1.f) Vertical_Axis = -1.f;
@@ -127,11 +125,11 @@ void Input::Axis()
 
 void Input::AxisRaw()
 {
-	if (KeyHold((int)KeyType::RIGHT)) Horizontal_AxisRaw = 1;
-	else if (KeyHold((int)KeyType::LEFT)) Horizontal_AxisRaw =- 1;
+	if (KeyHold(RIGHT)) Horizontal_AxisRaw = 1;
+	else if (KeyHold(LEFT)) Horizontal_AxisRaw =- 1;
 	else Horizontal_AxisRaw = 0;
-	if (KeyHold((int)KeyType::DOWN)) Vertical_AxisRaw = 1;
-	else if (KeyHold((int)KeyType::UP)) Vertical_AxisRaw = -1;
+	if (KeyHold(DOWN)) Vertical_AxisRaw = 1;
+	else if (KeyHold(UP)) Vertical_AxisRaw = -1;
 	else Vertical_AxisRaw = 0;
 }
 
