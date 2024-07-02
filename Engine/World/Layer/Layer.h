@@ -17,7 +17,6 @@ public:
 	void LateUpdate();
 	void Render();
 	void StateUpdate();
-	void ProcessDestroy(std::vector<Object*>& _objList);
 
 	LayerTag GetLayerTag() { return m_layerTag; }
 	std::vector<Object*>& GetObjectList() { return m_objectList; }
@@ -26,5 +25,9 @@ private:
 
 	LayerTag m_layerTag;
 	std::vector<Object*> m_objectList;
+	// 내부적으로 쓰는 코드들
+	void ProcessDestroy(std::vector<Object*>& _objList);
+	void SortingObject();
+
 };
 

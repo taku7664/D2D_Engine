@@ -73,6 +73,8 @@ void Layer::Render()
 void Layer::StateUpdate()
 {
 	ProcessDestroy(m_objectList);
+	// depthLevel값에 따라 오름차 정렬
+	SortingObject();
 }
 
 void Layer::ProcessDestroy(std::vector<Object*>& _objList)
@@ -100,4 +102,16 @@ void Layer::ProcessDestroy(std::vector<Object*>& _objList)
 			++iter;
 		}
 	}
+}
+
+// 비교 함수 정의
+bool CompareObject(const Object* obj1, const Object* obj2)
+{
+	return obj1->depthsLevel < obj2->depthsLevel;
+}
+
+
+void Layer::SortingObject()
+{
+	std::sort(m_objectList.begin(), m_objectList.end(), CompareObject);
 }

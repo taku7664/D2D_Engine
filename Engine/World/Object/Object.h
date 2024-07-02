@@ -31,6 +31,8 @@ public:
 	GameState	GetState() { return m_state; }
 
 	Transform2D* transform;
+	// 정수 비교와 부동소수점 비교시간의 차이를 테스트해봣으나 거의 별 차이가 없었음.
+	float depthsLevel;
 
 protected:
 

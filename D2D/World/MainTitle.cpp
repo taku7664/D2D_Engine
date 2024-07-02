@@ -2,6 +2,7 @@
 
 void MainTitle::WorldLoad()
 {
+	CollisionManager::SetCollsionLayer(LayerTag::Player, true);
 	{
 		// 배경 출력용 임시 리소스 생성
 		ResourceManager::AddSprite2D(L"S_BackGroud", L"bg.png");
@@ -26,15 +27,30 @@ void MainTitle::WorldLoad()
 	{
 		clone = CreateObject<Actor>("Background", LayerTag::Defalut, ObjectTag::Defalut);
 		clone->transform->position = { 100, 200 };
-		clone->AddComponent<TestScript>();
 		SpriteRenderer2D* sp = clone->AddComponent<SpriteRenderer2D>();
 		sp->bitmap = ResourceManager::GetSprite2D(L"S_BackGroud")->GetSprite();
 	}
 	// 애니메이션 테스트용 캐릭터
 	{
-		clone = CreateObject<Actor>("Charactor");
+		clone = CreateObject<Actor>("Charactor1", LayerTag::Player, ObjectTag::Defalut);
 		clone->AddComponent<TestScript>();
+		clone->transform->position = { 100, 300 };
+		clone->CreateChild("1_ChildCharactor1");
+		clone->CreateChild("1_ChildCharactor2");
+		clone->CreateChild("1_ChildCharactor3");
+		Animator2D* ani = clone->AddComponent<Animator2D>();
+		ani->AddAnimation("Idle", ResourceManager::GetAnimation2D(L"A_Idle"));
+		ani->ActiveAnimation("Idle");
+		RectRenderer* rect = clone->AddComponent<RectRenderer>();
+		rect->size = ani->GetActiveAnimation()->GetSprite()->GetSize();
+		rect->SetFill(false);
+	}
+	// 애니메이션 테스트용 캐릭터
+	{
+		clone = CreateObject<Actor>("Charactor2", LayerTag::Player, ObjectTag::Defalut);
+		clone->CreateChild("2_ChildCharactor1");
 		clone->transform->position = { 100, 200 };
+		clone->depthsLevel = clone->transform->position.y;
 		Animator2D* ani = clone->AddComponent<Animator2D>();
 		ani->AddAnimation("Idle", ResourceManager::GetAnimation2D(L"A_Idle"));
 		ani->ActiveAnimation("Idle");
@@ -53,9 +69,9 @@ void MainTitle::WorldLoad()
 		ca->viewportSize = { 400, 200 };
 	}
 	{
-		clone = CreateObject<Actor>("1");
-		clone = CreateObject<Actor>("２");
-		clone = CreateObject<Actor>("３");
+		clone = CreateObject<Actor>("Extra1", LayerTag::Player, ObjectTag::Camera);
+		clone = CreateObject<Actor>("Extra2", LayerTag::Player, ObjectTag::Camera);
+		clone = CreateObject<Actor>("Extra3", LayerTag::Player, ObjectTag::Camera);
 	}
 }
 

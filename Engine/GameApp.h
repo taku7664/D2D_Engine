@@ -5,6 +5,9 @@
 #include "Resource/Manager/ResourceManager.h"
 #include "Physics/Manager/CollisionManager.h"
 
+// 최상단 인터페이스
+// 클라이언트 측에서 GameApp을 include 및 상속해서 쓰면 모든 기능을 사용할 수 잇다.
+
 class GameApp
 {
 public:
@@ -30,5 +33,6 @@ private:
 
 	static void CenterOfScreen(HWND _hwnd);
 	static LRESULT CALLBACK WndProc(HWND _hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 };
 

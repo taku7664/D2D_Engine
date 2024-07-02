@@ -40,6 +40,7 @@ enum class ObjectTag
 
 enum class ObjectType
 {
+	None,
 	Actor,
 	DynamicText,
 	InputText,
@@ -48,14 +49,14 @@ enum class ObjectType
 
 enum class ComponentType
 {
-	Transform2D,
 	BoxCollider2D,
 	CircleCollider2D,
 	SpriteRenderer2D,
 	RectRenderer,
 	Animator2D,
-	Camera,
 	Script,
+	Transform2D,
+	Camera,
 	SIZE,
 };
 

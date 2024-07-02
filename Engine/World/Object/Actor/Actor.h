@@ -1,16 +1,16 @@
 #pragma once
 #include "../Object.h"
 // ExtraComponent
-#include "../../Component/Transform2D.h"
-#include "../../Component/Camera2D.h"
-#include "../../Component/Script.h"
+#include "../../../Component/Transform2D.h"
+#include "../../../Component/Camera2D.h"
+#include "../../../Component/Script.h"
 // RenderComponent
-#include "../../Component/Rednerer/SpriteRenderer2D.h"
-#include "../../Component/Rednerer/Animator2D.h"
-#include "../../Component/Rednerer/RectRenderer.h"
+#include "../../../Component/Rednerer/SpriteRenderer2D.h"
+#include "../../../Component/Rednerer/Animator2D.h"
+#include "../../../Component/Rednerer/RectRenderer.h"
 // ColliderComponent
-#include "../../Component/Collider/BoxCollider2D.h"
-#include "../../Component/Collider/CircleCollider2D.h"
+#include "../../../Component/Collider/BoxCollider2D.h"
+#include "../../../Component/Collider/CircleCollider2D.h"
 
 class Component;
 class Layer;

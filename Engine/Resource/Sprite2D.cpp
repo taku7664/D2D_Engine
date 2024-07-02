@@ -58,7 +58,6 @@ Resource::Sprite2D::Sprite2D(const std::wstring& _path, SpriteData _data)
     {
         for (int x = 0; x < cols; ++x)
         {
-            D2D1_RECT_F rect;
             rect.left = m_spriteData.offset.left + x * (textureSize.width / cols + m_spriteData.margin.x * cols);
             rect.top = m_spriteData.offset.top + y * (textureSize.height / rows + m_spriteData.margin.y * rows);
             rect.right = rect.left + (textureSize.width / cols);

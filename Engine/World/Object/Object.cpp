@@ -3,9 +3,13 @@
 
 
 Object::Object(std::string _name, ObjectTag _tag)
-	: m_name(_name),
+	: transform(nullptr),
+	m_parent(nullptr),
+	m_ownerLayer(nullptr),
+	m_name(_name),
 	m_tag(_tag),
-	m_state(GameState::Active)
+	m_state(GameState::Active),
+	depthsLevel(0)
 {
 }
 
