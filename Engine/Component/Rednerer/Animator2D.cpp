@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Animator2D.h"
-#include "../../World/Object/Object.h"
+#include "../../World/Object/Actor/Actor.h"
 #include "../Camera2D.h"
 #include "../Transform2D.h"
 #include "../../Render/D2DRender.h"

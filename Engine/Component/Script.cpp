@@ -16,3 +16,8 @@ void Script::Destroy(Object* _object)
 	_object->SetDestroy();
 }
 
+void Script::SetPersistentObject(Object* _obj, bool _isPersistent)
+{
+	_obj->SetPersistent(_isPersistent);
+}
+

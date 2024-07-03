@@ -68,6 +68,17 @@ void MainTitle::WorldLoad()
 		box->size = ani->GetActiveAnimation()->GetSprite()->GetSize();
 
 	}
+	{
+		clone = CreateObject<Actor>("Extra", LayerTag::Defalut, ObjectTag::Defalut);
+		clone->transform->position = { 550, 300 };
+		clone->depthsLevel = clone->transform->position.y + 100;
+		Animator2D* ani = clone->AddComponent<Animator2D>();
+		ani->AddAnimation("Idle", ResourceManager::GetAnimation2D(L"A_Idle"));
+		ani->ActiveAnimation("Idle");
+		BoxCollider2D* box = clone->AddComponent<BoxCollider2D>();
+		box->size = ani->GetActiveAnimation()->GetSprite()->GetSize();
+
+	}
 	// 카메라 컴포넌트 테스트용 서브 카메라 오브젝트
 	// 이러면 총 메인카메라 + 서브카메라로 총 화면에 2대가 있다.
 	{

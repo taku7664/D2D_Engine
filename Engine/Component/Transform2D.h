@@ -31,6 +31,8 @@ public:
 	static D2D1_MATRIX_3X2_F RotationMatrix(float _rotation);
 	static D2D1_MATRIX_3X2_F ScaleMatrix(float _xScale, float _yScale);
 
+	Object* gameObject;
+
 private:
 
 	Transform2D*				    m_parent;         // ºÎ¸ð

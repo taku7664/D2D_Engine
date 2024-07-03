@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "CollisionManager.h"
 
-bool CollisionManager::m_collisionLayer[(int)LayerTag::SIZE] = {false, };
+bool CollisionManager::m_collisionLayer[(int)LayerTag::SIZE] = {};
+std::unordered_map<UINT64, bool> CollisionManager::m_collisionMap = {};
 int CollisionManager::collisionCount = 0;
 int CollisionManager::objectCount = 0;
 std::vector<Layer*> CollisionManager::tempLayer;
@@ -15,8 +16,8 @@ void CollisionManager::FixedUpdate()
 	MergeCollisionLayer();
 	
 	IterateCollisionLayer();
-	Debug.Log("Total Object Count : " + std::to_string(objectCount));
-	Debug.Log("Total Collision Check : " + std::to_string(collisionCount));
+	//Debug.Log("Total Object Count : " + std::to_string(objectCount));
+	//Debug.Log("Total Collision Check : " + std::to_string(collisionCount));
 }
 
 void CollisionManager::SetCollsionLayer(LayerTag _layerTag, bool _isCheck)
@@ -24,6 +25,37 @@ void CollisionManager::SetCollsionLayer(LayerTag _layerTag, bool _isCheck)
 	m_collisionLayer[(int)_layerTag] = _isCheck;
 }
 
+bool CollisionManager::GetCollisionID(Collider* left, Collider* right)
+{
+	// 두 충돌체의  ID 확인
+	CollisionID collisionID;
+	collisionID.left = left->GetID();
+	collisionID.right = right->GetID();
+
+	// 이전 충돌정보를 검색한다.
+	auto iter = m_collisionMap.find(collisionID.id);
+
+	// 충돌정보가 없다면 충돌정보를 만들어준다.
+	if (iter == m_collisionMap.end())
+	{
+		m_collisionMap.insert(std::make_pair(collisionID.id, false));
+		iter = m_collisionMap.find(collisionID.id);
+	}
+	return iter->second;
+}
+
+void CollisionManager::SetCollisionID(Collider* left, Collider* right, bool enable)
+{
+	// 두 충돌체의  ID 확인
+	CollisionID collisionID;
+	collisionID.left = left->GetID();
+	collisionID.right = right->GetID();
+
+	// 이전 충돌정보를 검색한다.
+	auto iter = m_collisionMap.find(collisionID.id);
+
+	iter->second = enable;
+}
 
 void CollisionManager::MergeCollisionLayer()
 {
@@ -71,47 +103,74 @@ void CollisionManager::IterateCollisionLayer()
 						Actor* right = dynamic_cast<Actor*>((*_right));
 						if (right)
 						{
-							CheckCollision(left, right);
-							Debug.Log(std::to_string(collisionCount) + (collisionCount >= 10 ? "" : " ") +
-								"st CollisionCheck    " + left->GetName() + " : " + right->GetName());
+							CheckCollider(left, right);
+							//Debug.Log(std::to_string(collisionCount) + (collisionCount >= 10 ? "" : " ") +
+								//"st CollisionCheck    " + left->GetName() + " : " + right->GetName());
 						}
 					}
 				}
 			}
 		}
 	}
+
 }
 
-void CollisionManager::CheckCollision(Actor* _left, Actor* _right)
+void CollisionManager::CheckCollider(Actor* _left, Actor* _right)
 {
 
 	collisionCount++; // 그냥 충돌체크를 몇번하는지 누적
 
-	// Actor로 dynmic_cast에 성공했는지 확인
-	if (_left && _right)
+	// 오브젝트의 콜라이더를 받아온다.
+	Collider* _leftCollider = _left->GetComponent<Collider>();
+	Collider* _rightCollider = _right->GetComponent<Collider>();
+
+	// 둘다 콜라이더가 있을 시에만 검사를 한다.
+	if (_leftCollider && _rightCollider)
 	{
-		// 오브젝트의 콜라이더를 받아온다.
-		Collider* _leftCollider = _left->GetComponent<Collider>();
-		Collider* _rightCollider = _right->GetComponent<Collider>();
-		// 둘다 콜라이더가 있을 시에만 검사를 한다.
-		if (_leftCollider && _rightCollider)
+		// ID값을 통해 서로의 충돌상태를 확인
+		bool check = GetCollisionID(_leftCollider, _rightCollider);
+
+		if (CheckCollision(_leftCollider, _rightCollider))
 		{
-			// 콜라이더 타입을 받아온다.
-			ComponentType _leftColliderType = _leftCollider->GetType();
-			ComponentType _rightColliderType = _rightCollider->GetType();
-			// 콜라이더의 종류에 따라 다른 충돌 알고리즘을 호출한다.
-			if (_leftColliderType == ComponentType::BoxCollider2D && _rightColliderType == ComponentType::BoxCollider2D)
+			// 충돌중이지 않았으면 Enter
+			if (check == false)
 			{
-				if (AABB(dynamic_cast<BoxCollider2D*>(_leftCollider), dynamic_cast<BoxCollider2D*>(_rightCollider)))
-				{
-					Debug.Log("Collision");
-				}
+				_leftCollider->OnCollisionEnter(_right);
+				_rightCollider->OnCollisionEnter(_left);
+				SetCollisionID(_leftCollider, _rightCollider, true);
+			}
+			// 이미 충돌중이었으면 Stay
+			else if (check == true)
+			{
+				_leftCollider->OnCollisionStay(_right);
+				_rightCollider->OnCollisionStay(_left);
+			}
+		}
+		else
+		{
+			// 충돌하지 않았는데 이전 틱에 충돌중이었으면 Exit
+			if (check == true)
+			{
+				_leftCollider->OnCollisionExit(_right);
+				_rightCollider->OnCollisionExit(_left);
+				SetCollisionID(_leftCollider, _rightCollider, false);
 			}
 		}
 	}
 }
 
-bool CollisionManager::AABB(BoxCollider2D* _left, BoxCollider2D* _right)
+bool CollisionManager::CheckCollision(Collider* _left, Collider* _right)
+{
+	// 콜라이더 타입을 받아온다.
+	ComponentType _leftType = _left->GetType();
+	ComponentType _rightType = _right->GetType();
+
+	// 콜라이더의 종류에 따라 다른 충돌 알고리즘을 호출한다.
+	if (_leftType == ComponentType::BoxCollider2D && _rightType == ComponentType::BoxCollider2D)
+		return (BoxToBox(dynamic_cast<BoxCollider2D*>(_left), dynamic_cast<BoxCollider2D*>(_right)));
+}
+
+bool CollisionManager::BoxToBox(BoxCollider2D* _left, BoxCollider2D* _right)
 {
 	// 아래는 충돌검사 로직
 	Vector2 leftTr = _left->gameObject->transform->WorldPosition() + _left->offset;

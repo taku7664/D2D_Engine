@@ -2,7 +2,6 @@
 #include "../Component.h"
 #include "../Camera2D.h"
 #include "../../World/Object/Object.h"
-#include "../Script.h"
 
 class Collider 
 	: public Component
@@ -14,15 +13,23 @@ public:
 
 	virtual void Draw(Camera2D* _camera);
 
-	void OnCollisionEnter(Object* other);
-	void OnCollisionStay(Object* other);
-	void OnCollisionExit(Object* other);
+	void OnCollisionEnter(Actor* other);
+	void OnCollisionStay(Actor* other);
+	void OnCollisionExit(Actor* other);
+
+	static void CollisionIDClear() { CollisionID = 1; }
+
+	UINT32 GetID() { return m_id; }
 
 	bool isTrigger;
 
 	Vector2 offset;
 
 private:
+
+	static UINT CollisionID;
+
+	UINT32 m_id;
 
 };
 

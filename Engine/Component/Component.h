@@ -2,6 +2,7 @@
 
 class Camera2D;
 class Object;
+class Actor;
 
 class Component abstract
 {
@@ -19,7 +20,7 @@ public:
 	virtual void	Draw(Camera2D* _camera) {}
 	virtual void	Render() {}
 
-	Object* gameObject; // 자신을 소유한 오브젝트 (const로 바꿀 방법을 찾자)
+	Actor* gameObject; // 자신을 소유한 오브젝트 (const로 바꿀 방법을 찾자)
 
 protected:
 

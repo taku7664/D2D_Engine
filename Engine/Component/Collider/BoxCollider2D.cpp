@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "BoxCollider2D.h"
 #include "../../Render/D2DRender.h"	
+#include "../../World/Object/Actor/Actor.h"
 
 BoxCollider2D::BoxCollider2D()
 	: size({ 0.f,0.f })

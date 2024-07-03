@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 
-class Object;
+class Actor;
 class WorldManager;
 
 class Script : public Component
@@ -23,7 +23,7 @@ public:
 
 	// 스크립트에서 사용하는 함수
 	void         Destroy(Object* _obj);
-	void         SetPersistentObject(Object* _obj);
+	void         SetPersistentObject(Object* _obj, bool _isPersistent);
 	template<typename T>
 	T*			 FindObject(const std::wstring& _name, const LayerTag _tag = LayerTag::Defalut);
 
@@ -31,6 +31,9 @@ public:
 	virtual void OnEnable() {}; // 오브젝트가 활성화 되면 호출됩니다.
 	virtual void OnDisable() {}; // 오브젝트가 비활성화 되면 호출됩니다.
 	virtual void OnDestroy() {}; // 오브젝트가 파괴될 때 호출됩니다.
+	virtual void OnCollisionEnter(Actor* _collision) {};
+	virtual void OnCollisionStay(Actor* _collision) {};
+	virtual void OnCollisionExit(Actor* _collision) {};
 };
 
 template<typename T>

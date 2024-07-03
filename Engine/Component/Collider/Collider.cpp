@@ -1,8 +1,12 @@
 #include "pch.h"
 #include "Collider.h"
+#include "../../World/Object/Actor/Actor.h"
+
+UINT Collider::CollisionID = 1;
 
 Collider::Collider()
-	: isTrigger(false)
+	: isTrigger(false),
+	m_id(CollisionID++)
 {
 
 }
@@ -16,35 +20,35 @@ void Collider::Draw(Camera2D* _camera)
 {
 }
 
-void Collider::OnCollisionEnter(Object* other)
+void Collider::OnCollisionEnter(Actor* other)
 {
-	/*for (Component*& comp : m_owner->GetComponentList(ComponentType::Script))
+	for (Component*& comp : gameObject->GetComponentList(ComponentType::Script))
 	{
 		if (comp->GetType() == ComponentType::Script && comp->GetState() == GameState::Active)
 		{
 			dynamic_cast<Script*>(comp)->OnCollisionEnter(other);
 		}
-	}*/
+	}
 }
 
-void Collider::OnCollisionStay(Object* other)
+void Collider::OnCollisionStay(Actor* other)
 {
-	/*for (Component*& comp : GetOwner()->GetComponentList())
+	for (Component*& comp : gameObject->GetComponentList(ComponentType::Script))
 	{
 		if (comp->GetType() == ComponentType::Script && comp->GetState() == GameState::Active)
 		{
 			dynamic_cast<Script*>(comp)->OnCollisionStay(other);
 		}
-	}*/
+	}
 }
 
-void Collider::OnCollisionExit(Object* other)
+void Collider::OnCollisionExit(Actor* other)
 {
-	/*for (Component*& comp : GetOwner()->GetComponentList())
+	for (Component*& comp : gameObject->GetComponentList(ComponentType::Script))
 	{
 		if (comp->GetType() == ComponentType::Script && comp->GetState() == GameState::Active)
 		{
 			dynamic_cast<Script*>(comp)->OnCollisionExit(other);
 		}
-	}*/
+	}
 }

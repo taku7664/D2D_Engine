@@ -34,4 +34,17 @@ public:
 		}
 		gameObject->depthsLevel = gameObject->transform->position.y;
 	}
+
+	void OnCollisionEnter(Actor* collision)
+	{
+		Debug.Log("OnCollisionEnter()");
+	}
+	void OnCollisionStay(Actor* collision)
+	{
+		Debug.Log("OnCollisionStay()");
+	}
+	void OnCollisionExit(Actor* collision)
+	{
+		Debug.Log("OnCollisionExit()");
+	}
 };
