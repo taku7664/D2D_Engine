@@ -3,6 +3,7 @@
 #include "../../World/Object/Object.h"
 #include "../Camera2D.h"
 #include "../Transform2D.h"
+#include "../../Render/D2DRender.h"
 
 Animator2D::Animator2D()
 {
@@ -53,7 +54,7 @@ void Animator2D::Draw(Camera2D* _camera)
 		return;
 
 	size = m_activeAnimation->GetSprite(m_activeAnimation->GetFrameData()[currentFrame].index)->GetSize();
-	D2D1_VECTOR_2F center = { (size.width / 2) + offset.x, (size.height / 2) + offset.y }; // offset이 과연 중심축을 잘 옮겨줄까? 에 대한 테스트가 필요함 <- 잘된다!
+	Vector2 center = { (size.width / 2) + offset.x, (size.height / 2) + offset.y }; // offset이 과연 중심축을 잘 옮겨줄까? 에 대한 테스트가 필요함 <- 잘된다!
 
 	// 중앙을 축으로 회전 및 뒤집기 변환 행렬 설정
 	D2D1_MATRIX_3X2_F transform =
@@ -68,6 +69,8 @@ void Animator2D::Draw(Camera2D* _camera)
 		m_activeAnimation->GetSprite(m_activeAnimation->GetFrameData()[currentFrame].index),
 		{ 0, 0, size.width, size.height },
 		alpha);
+	D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2F(center.x, center.y), 3.f, 3.f);
+	renderTarget->DrawEllipse(ellipse, D2DRender::GetBrush(), 3.f);
 
 	renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 }

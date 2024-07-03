@@ -67,7 +67,7 @@ D2D_MATRIX_3X2_F Transform2D::CalculationWorldTransform()
 	}
 }
 
-D2D_VECTOR_2F Transform2D::WorldPosition()
+Vector2 Transform2D::WorldPosition()
 {
 	return { m_worldMatrix.dx, m_worldMatrix.dy };
 }
@@ -84,11 +84,11 @@ float Transform2D::WorldRotation()
 	}
 }
 
-D2D_VECTOR_2F Transform2D::WorldScale()
+Vector2 Transform2D::WorldScale()
 {
 	if (m_parent != nullptr)
 	{
-		D2D_VECTOR_2F parentScale = this->m_parent->WorldScale();
+		Vector2 parentScale = this->m_parent->WorldScale();
 		return { parentScale.x * this->scale.x, parentScale.y * this->scale.y };
 	}
 	else
@@ -97,9 +97,14 @@ D2D_VECTOR_2F Transform2D::WorldScale()
 	}
 }
 
-D2D1_MATRIX_3X2_F Transform2D::TranslateMatrix(float _wid, float _hei)
+D2D1_MATRIX_3X2_F Transform2D::TranslateMatrix(float _x, float _y)
 {
-	return D2D1::Matrix3x2F::Translation(_wid, _hei);
+	return D2D1::Matrix3x2F::Translation(_x, _y);
+}
+
+D2D1_MATRIX_3X2_F Transform2D::TranslateMatrix(Vector2 _xy)
+{
+	return D2D1::Matrix3x2F::Translation(_xy.x, _xy.y);
 }
 
 D2D1_MATRIX_3X2_F Transform2D::RotationMatrix(float _rotation)

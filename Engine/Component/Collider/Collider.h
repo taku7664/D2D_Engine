@@ -20,7 +20,7 @@ public:
 
 	bool isTrigger;
 
-	D2D1_VECTOR_2F offset;
+	Vector2 offset;
 
 private:
 

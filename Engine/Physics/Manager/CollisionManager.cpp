@@ -6,7 +6,6 @@ int CollisionManager::collisionCount = 0;
 int CollisionManager::objectCount = 0;
 std::vector<Layer*> CollisionManager::tempLayer;
 
-// 추가해야 될 것 : 자식 충돌은 어떻게 구현할 것인가....ㅁㅊ... 진짜 난제다 후
 void CollisionManager::FixedUpdate()
 {
 	collisionCount = 0;
@@ -38,39 +37,6 @@ void CollisionManager::MergeCollisionLayer()
 			objectCount += tempLayer.back()->GetObjectList().size(); // 오브젝트 수 누적
 		}
 	}
-}
-
-void CollisionManager::CheckCollision(Actor* _left, Actor* _right)
-{
-
-	collisionCount++; // 그냥 충돌체크를 몇번하는지 누적
-
-	// Actor로 dynmic_cast에 성공했는지 확인
-	if (_left && _right)
-	{
-		// 오브젝트의 콜라이더를 받아온다.
-		Collider* _leftCollider = _left->GetComponent<Collider>();
-		Collider* _rightCollider = _right->GetComponent<Collider>();
-		// 둘다 콜라이더가 있을 시에만 검사를 한다.
-		if (_leftCollider && _rightCollider)
-		{
-			// 콜라이더 타입을 받아온다.
-			ComponentType _leftColliderType = _leftCollider->GetType();
-			ComponentType _rightColliderType = _rightCollider->GetType();
-			// 콜라이더의 종류에 따라 다른 충돌 알고리즘을 호출한다.
-			if (_leftColliderType == ComponentType::BoxCollider2D && _rightColliderType == ComponentType::BoxCollider2D)
-			{
-				AABB(dynamic_cast<BoxCollider2D*>(_leftCollider), dynamic_cast<BoxCollider2D*>(_rightCollider));
-			}
-		}
-	}
-}
-
-
-bool CollisionManager::AABB(BoxCollider2D* left, BoxCollider2D* _right)
-{
-	// 아래는 충돌검사 로직
-	return false;
 }
 
 void CollisionManager::IterateCollisionLayer()
@@ -114,4 +80,49 @@ void CollisionManager::IterateCollisionLayer()
 			}
 		}
 	}
+}
+
+void CollisionManager::CheckCollision(Actor* _left, Actor* _right)
+{
+
+	collisionCount++; // 그냥 충돌체크를 몇번하는지 누적
+
+	// Actor로 dynmic_cast에 성공했는지 확인
+	if (_left && _right)
+	{
+		// 오브젝트의 콜라이더를 받아온다.
+		Collider* _leftCollider = _left->GetComponent<Collider>();
+		Collider* _rightCollider = _right->GetComponent<Collider>();
+		// 둘다 콜라이더가 있을 시에만 검사를 한다.
+		if (_leftCollider && _rightCollider)
+		{
+			// 콜라이더 타입을 받아온다.
+			ComponentType _leftColliderType = _leftCollider->GetType();
+			ComponentType _rightColliderType = _rightCollider->GetType();
+			// 콜라이더의 종류에 따라 다른 충돌 알고리즘을 호출한다.
+			if (_leftColliderType == ComponentType::BoxCollider2D && _rightColliderType == ComponentType::BoxCollider2D)
+			{
+				if (AABB(dynamic_cast<BoxCollider2D*>(_leftCollider), dynamic_cast<BoxCollider2D*>(_rightCollider)))
+				{
+					Debug.Log("Collision");
+				}
+			}
+		}
+	}
+}
+
+bool CollisionManager::AABB(BoxCollider2D* _left, BoxCollider2D* _right)
+{
+	// 아래는 충돌검사 로직
+	Vector2 leftTr = _left->gameObject->transform->WorldPosition() + _left->offset;
+	Vector2 rightTr = _right->gameObject->transform->WorldPosition() + _right->offset;
+
+	D2D1_RECT_F leftRect = { leftTr.x, leftTr.y, leftTr.x + _left->size.width, leftTr.y + _left->size.height };
+	D2D1_RECT_F rightRect = { rightTr.x, rightTr.y, rightTr.x + _right->size.width, rightTr.y + _right->size.height };
+
+	// 충돌 여부를 검사
+	bool isColliding = (leftRect.left < rightRect.right && leftRect.right > rightRect.left &&
+		leftRect.top < rightRect.bottom && leftRect.bottom > rightRect.top);
+
+	return isColliding;
 }

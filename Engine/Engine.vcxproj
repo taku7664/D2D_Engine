@@ -178,6 +178,9 @@
     <ClInclude Include="Component\Rednerer\SpriteRenderer2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Helper\DataType\Vector2.cpp" />
+    <ClCompile Include="Helper\DataType\Vector2.h" />
+    <ClCompile Include="Helper\Math\MathF.cpp" />
     <ClCompile Include="Physics\Manager\CollisionManager.cpp" />
     <ClCompile Include="Component\Collider\BoxCollider2D.cpp" />
     <ClCompile Include="Component\Collider\CircleCollider2D.cpp" />
@@ -192,8 +195,7 @@
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\Rednerer\Renderer.cpp" />
     <ClCompile Include="Helper\Input\Input.cpp" />
-    <ClCompile Include="Helper\Math\Math.cpp" />
-    <ClCompile Include="Helper\Math\Math.h" />
+    <ClCompile Include="Helper\Math\MathF.h" />
     <ClCompile Include="Helper\Time\Time.cpp" />
     <ClCompile Include="World\Layer\Layer.cpp" />
     <ClCompile Include="Render\D2DRender.cpp" />

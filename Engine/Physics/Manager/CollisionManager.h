@@ -22,5 +22,5 @@ private:
 	static void IterateCollisionLayer();
 	static void CheckCollision(Actor* _left, Actor* _right);
 
-	static bool AABB(BoxCollider2D* left, BoxCollider2D* _right);
+	static bool AABB(BoxCollider2D* _left, BoxCollider2D* _right);
 };

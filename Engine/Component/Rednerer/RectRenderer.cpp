@@ -28,7 +28,7 @@ void RectRenderer::Draw(Camera2D* _camera)
 	Transform2D* tr = gameObject->transform;
 	if (!tr) assert("transform is Nullptr");
 
-	D2D1_VECTOR_2F center = { size.width / 2 + offset.x , size.height / 2 + offset.y }; 
+	Vector2 center = { size.width / 2 + offset.x , size.height / 2 + offset.y }; 
 
 	// 중앙을 축으로 회전 및 뒤집기 변환 행렬 설정
 	D2D1_MATRIX_3X2_F transform =

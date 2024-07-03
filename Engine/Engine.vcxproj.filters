@@ -164,7 +164,7 @@
     <ClCompile Include="Helper\Time\Time.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Helper\Math\Math.h">
+    <ClCompile Include="Helper\Math\MathF.h">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="World\World.cpp">
@@ -174,9 +174,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="World\Layer\Layer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Helper\Math\Math.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Component\Rednerer\Animator2D.cpp">
@@ -207,6 +204,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Physics\Manager\CollisionManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper\DataType\Vector2.h">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper\DataType\Vector2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper\Math\MathF.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

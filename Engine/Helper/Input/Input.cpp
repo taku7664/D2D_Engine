@@ -12,7 +12,7 @@ int				 Input::Vertical_AxisRaw = 0;
 KeyState		 Input::Key_Code[256]{};
 MouseState		 Input::Cur_Mouse{};
 MouseState		 Input::Pre_Mouse{};
-D2D1_VECTOR_2F   Input::mousePosition = { 0,0 };
+Vector2   Input::mousePosition = { 0,0 };
 
 // 누른 키보드 값을 저장합니다.
 void Input::GetKey(MSG msg)

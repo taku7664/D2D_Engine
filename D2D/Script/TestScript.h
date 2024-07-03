@@ -13,7 +13,6 @@ public:
 		if (Input::KeyHold(SPACEBAR))
 		{
 			gameObject->transform->rotation += 90 * Time::deltaTime;
-			gameObject->transform->scale.x += Time::deltaTime;
 		}
 		if (Input::KeyHold(LEFT))
 		{

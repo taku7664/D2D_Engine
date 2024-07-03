@@ -5,8 +5,8 @@ struct AnimationData
 {
 	int index;
 	float duration;
-	D2D1_VECTOR_2F offset;
-	AnimationData(int _index, float _duration, D2D1_VECTOR_2F _offset = { 0,0 })
+	Vector2 offset;
+	AnimationData(int _index, float _duration, Vector2 _offset = { 0,0 })
 		: index(_index), duration(_duration), offset(_offset) {}
 };
 

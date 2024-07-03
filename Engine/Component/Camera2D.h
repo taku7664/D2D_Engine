@@ -23,7 +23,7 @@ public:
     ID2D1BitmapRenderTarget* GetBitmapRenderTarget() { return m_bitmapRenderTarget; }
     D2D1_MATRIX_3X2_F CameraMatrix();
 
-    D2D_VECTOR_2F viewportPosition;   // 화면에 배치할 카메라 위치
+    Vector2 viewportPosition;   // 화면에 배치할 카메라 위치
     D2D_SIZE_F viewportSize;          // 화면에 배치할 카메라 사이즈
 
 private:

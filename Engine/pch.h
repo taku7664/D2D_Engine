@@ -23,7 +23,8 @@
 #include <comdef.h>
 
 #include "Helper/CommonEnum.h"
-#include "Helper/Math/Math.h"
+#include "Helper/Math/MathF.h"
+#include "Helper/DataType/Vector2.h"
 #include "Helper/ReferenceCounter.h"
 #include "Helper/Utillity.h"
 #include "Helper/Debug.h"

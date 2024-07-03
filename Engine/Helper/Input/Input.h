@@ -31,7 +31,7 @@ private:
 
 public:
 
-	static D2D_VECTOR_2F mousePosition;
+	static Vector2 mousePosition;
 
 	static void GetKey(MSG msg);
 	static void Update();

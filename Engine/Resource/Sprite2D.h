@@ -3,13 +3,13 @@
 
 struct SpriteData
 {
-	D2D_VECTOR_2F cut_by_grid;
-	D2D_VECTOR_2F margin;
+	Vector2		  cut_by_grid;
+	Vector2	      margin;
 	D2D_RECT_F    offset;
 
 	SpriteData(
-		D2D_VECTOR_2F _grid = { 1,1 },
-		D2D_VECTOR_2F _margin = { 0,0 },
+		Vector2 _grid = { 1,1 },
+		Vector2 _margin = { 0,0 },
 		D2D_RECT_F _offset = { 0,0,0,0 })
 		: cut_by_grid(_grid),
 		offset(_offset),

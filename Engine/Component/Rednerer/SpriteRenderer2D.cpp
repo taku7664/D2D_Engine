@@ -21,7 +21,7 @@ void SpriteRenderer2D::Draw(Camera2D* _camera)
 	if (!tr) assert("Transform is Nullptr");
 
 	size = bitmap->GetSize();
-	D2D1_VECTOR_2F center = { size.width / 2 + offset.x , size.height / 2 + offset.y }; // offset이 과연 중심축과 같이 움직이는게 맞을까?
+	Vector2 center = { size.width / 2 + offset.x , size.height / 2 + offset.y }; // offset이 과연 중심축과 같이 움직이는게 맞을까?
 
 	// 중앙을 축으로 회전 및 뒤집기 변환 행렬 설정
 	D2D1_MATRIX_3X2_F Transform =

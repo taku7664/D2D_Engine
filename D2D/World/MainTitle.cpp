@@ -3,11 +3,12 @@
 void MainTitle::WorldLoad()
 {
 	CollisionManager::SetCollsionLayer(LayerTag::Player, true);
+	CollisionManager::SetCollsionLayer(LayerTag::Monster, true);
 	{
 		// 배경 출력용 임시 리소스 생성
 		ResourceManager::AddSprite2D(L"S_BackGroud", L"bg.png");
 		// 애니메이션 출력용 임시 리소스 생성
-		ResourceManager::AddSprite2D(L"S_Idle", L"3.png", SpriteData({ 5,5 }));
+		ResourceManager::AddSprite2D(L"S_Idle", L"3.png", SpriteData(Vector2( 5,5 )));
 		std::vector<AnimationData> arr = {
 			{0, 0.1f},
 			{1, 0.1f},
@@ -38,12 +39,13 @@ void MainTitle::WorldLoad()
 		Animator2D* ani = clone->AddComponent<Animator2D>();
 		ani->AddAnimation("Idle", ResourceManager::GetAnimation2D(L"A_Idle"));
 		ani->ActiveAnimation("Idle");
-		RectRenderer* rect = clone->AddComponent<RectRenderer>();
-		rect->size = ani->GetActiveAnimation()->GetSprite()->GetSize();
-		rect->SetFill(false);
+		BoxCollider2D* box = clone->AddComponent<BoxCollider2D>();
+		box->size = ani->GetActiveAnimation()->GetSprite()->GetSize();
+		//box->size.width /= 2;
+		box->offset = { 50, 50 };
 	}
-	// 애니메이션 테스트용 캐릭터
-	{
+	// 자식 검사용
+	/*{
 		clone = CreateObject<Actor>("Charactor2", LayerTag::Player, ObjectTag::Defalut);
 		clone->transform->position = { 50, 200 };
 		clone->transform->SetParent(FindObject<Actor>("Charactor1")->transform);
@@ -51,9 +53,20 @@ void MainTitle::WorldLoad()
 		Animator2D* ani = clone->AddComponent<Animator2D>();
 		ani->AddAnimation("Idle", ResourceManager::GetAnimation2D(L"A_Idle"));
 		ani->ActiveAnimation("Idle");
-		RectRenderer* rect = clone->AddComponent<RectRenderer>();
-		rect->size = ani->GetActiveAnimation()->GetSprite()->GetSize();
-		rect->SetFill(false);
+		BoxCollider2D* box = clone->AddComponent<BoxCollider2D>();
+		box->size = ani->GetActiveAnimation()->GetSprite()->GetSize();
+
+	}*/
+	{
+		clone = CreateObject<Actor>("Monster", LayerTag::Monster, ObjectTag::Defalut);
+		clone->transform->position = { 300, 300 };
+		clone->depthsLevel = clone->transform->position.y + 100;
+		Animator2D* ani = clone->AddComponent<Animator2D>();
+		ani->AddAnimation("Idle", ResourceManager::GetAnimation2D(L"A_Idle"));
+		ani->ActiveAnimation("Idle");
+		BoxCollider2D* box = clone->AddComponent<BoxCollider2D>();
+		box->size = ani->GetActiveAnimation()->GetSprite()->GetSize();
+
 	}
 	// 카메라 컴포넌트 테스트용 서브 카메라 오브젝트
 	// 이러면 총 메인카메라 + 서브카메라로 총 화면에 2대가 있다.
@@ -64,15 +77,6 @@ void MainTitle::WorldLoad()
 		ca->SetBackGroundColor(D2D1::ColorF(D2D1::ColorF::Gray));
 		ca->viewportPosition = { 500, 50 };
 		ca->viewportSize = { 400, 200 };
-	}
-	{
-		clone = CreateObject<Actor>("Extra1", LayerTag::Player, ObjectTag::Camera);
-		clone = CreateObject<Actor>("Extra2", LayerTag::Player, ObjectTag::Camera);
-		clone = CreateObject<Actor>("Extra3", LayerTag::Player, ObjectTag::Camera);
-		clone = CreateObject<Actor>("Extra4", LayerTag::Player, ObjectTag::Camera);
-		clone = CreateObject<Actor>("Extra5", LayerTag::Player, ObjectTag::Camera);
-		clone = CreateObject<Actor>("Extra6", LayerTag::Player, ObjectTag::Camera);
-		clone = CreateObject<Actor>("Extra7", LayerTag::Player, ObjectTag::Camera);
 	}
 }
 
