@@ -69,7 +69,7 @@ void MainTitle::WorldLoad()
 
 	}
 	{
-		clone = CreateObject<Actor>("Extra", LayerTag::Defalut, ObjectTag::Defalut);
+		clone = CreateObject<Actor>("Extra", LayerTag::Monster, ObjectTag::Defalut);
 		clone->transform->position = { 550, 300 };
 		clone->depthsLevel = clone->transform->position.y + 100;
 		Animator2D* ani = clone->AddComponent<Animator2D>();

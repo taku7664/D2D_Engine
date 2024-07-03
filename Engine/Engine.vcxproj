@@ -143,6 +143,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FMOD\fmod.h" />
+    <ClInclude Include="FMOD\fmod.hpp" />
+    <ClInclude Include="FMOD\fmod_codec.h" />
+    <ClInclude Include="FMOD\fmod_common.h" />
+    <ClInclude Include="FMOD\fmod_dsp.h" />
+    <ClInclude Include="FMOD\fmod_dsp_effects.h" />
+    <ClInclude Include="FMOD\fmod_errors.h" />
+    <ClInclude Include="FMOD\fmod_output.h" />
+    <ClInclude Include="Resource\AudioClip.h" />
     <ClInclude Include="Physics\Manager\CollisionManager.h" />
     <ClInclude Include="Component\Collider\BoxCollider2D.h" />
     <ClInclude Include="Component\Collider\CircleCollider2D.h" />
@@ -168,7 +177,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource\Animation2D.h" />
     <ClInclude Include="Resource\Manager\ResourceManager.h" />
-    <ClInclude Include="Resource\Resource2D.h" />
+    <ClInclude Include="Resource\Resource.h" />
     <ClInclude Include="World\Manager\WorldManager.h" />
     <ClInclude Include="World\World.h" />
     <ClInclude Include="World\Object\Object.h" />
@@ -178,6 +187,7 @@
     <ClInclude Include="Component\Rednerer\SpriteRenderer2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Resource\AudioClip.cpp" />
     <ClCompile Include="Helper\DataType\Vector2.cpp" />
     <ClCompile Include="Helper\DataType\Vector2.h" />
     <ClCompile Include="Helper\Math\MathF.cpp" />
@@ -208,7 +218,7 @@
     </ClCompile>
     <ClCompile Include="Resource\Animation2D.cpp" />
     <ClCompile Include="Resource\Manager\ResourceManager.cpp" />
-    <ClCompile Include="Resource\Resource2D.cpp" />
+    <ClCompile Include="Resource\Resource.cpp" />
     <ClCompile Include="World\Manager\WorldManager.cpp" />
     <ClCompile Include="World\World.cpp" />
     <ClCompile Include="World\Object\Object.cpp" />

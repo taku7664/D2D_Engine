@@ -25,11 +25,11 @@ public:
 
 	Vector2 offset;
 
-private:
+protected:
 
 	static UINT CollisionID;
-
 	UINT32 m_id;
+	D2D1_COLOR_F m_color = D2D1::ColorF(D2D1::ColorF::GreenYellow);
 
 };
 

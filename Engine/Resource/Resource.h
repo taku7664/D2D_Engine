@@ -3,13 +3,13 @@
 
 namespace Resource
 {
-	class Resource2D abstract
+	class Resource abstract
 		: public ReferenceCounter
 	{
 	public:
 
-		Resource2D();
-		virtual ~Resource2D();
+		Resource();
+		virtual ~Resource();
 
 	protected:
 		std::wstring m_key;   // Å°°ª

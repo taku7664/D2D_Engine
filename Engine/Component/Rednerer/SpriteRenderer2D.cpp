@@ -5,6 +5,7 @@
 #include "../Transform2D.h"
 
 SpriteRenderer2D::SpriteRenderer2D()
+	: bitmap(nullptr)
 {
 	m_type = ComponentType::SpriteRenderer2D;
 }

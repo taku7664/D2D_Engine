@@ -1,5 +1,5 @@
 #pragma once
-#include "Resource2D.h"
+#include "Resource.h"
 
 struct SpriteData
 {
@@ -19,7 +19,7 @@ struct SpriteData
 namespace Resource
 {
 	class Sprite2D
-		: public Resource2D
+		: public Resource
 	{
 	public:
 

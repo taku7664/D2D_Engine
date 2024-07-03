@@ -1,6 +1,7 @@
 #pragma once
 #include "../Sprite2D.h"
 #include "../Animation2D.h"
+#include "../AudioClip.h"
 
 class ResourceManager
 {

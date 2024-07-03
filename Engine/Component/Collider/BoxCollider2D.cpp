@@ -38,7 +38,7 @@ void BoxCollider2D::Draw(Camera2D* _camera)
 		D2D1_RECT_F rect = D2D1::RectF(0, 0, size.width, size.height);
 
 		// 외곽선 출력
-		brush->SetColor(D2D1::ColorF(D2D1::ColorF::GreenYellow));
+		brush->SetColor(m_color);
 		renderTarget->DrawRectangle(rect, brush);
 		// 중심점 출력
 		Vector2 center = { size.width / 2 , size.height / 2 };

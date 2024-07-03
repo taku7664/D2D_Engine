@@ -13,10 +13,10 @@ struct AnimationData
 namespace Resource
 {
 	class Animation2D
-		: public Resource2D
+		: public Resource
 	{
 	public:
-		Animation2D(std::wstring _key, Resource::Sprite2D* _sprite, std::vector<AnimationData>& _data);
+		Animation2D(std::wstring _key, Sprite2D* _sprite, std::vector<AnimationData>& _data);
 		virtual ~Animation2D();
 		std::vector<AnimationData>& GetFrameData() { return m_frameData; }
 		ID2D1Bitmap* GetSprite(int _index = 0) { return m_sprite->GetSprite(_index); }

@@ -33,7 +33,7 @@
     <ClInclude Include="Resource\Manager\ResourceManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Resource2D.h">
+    <ClInclude Include="Resource\Resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="World\Object\Object.h">
@@ -114,6 +114,33 @@
     <ClInclude Include="Physics\Manager\CollisionManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\AudioClip.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FMOD\fmod.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FMOD\fmod.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FMOD\fmod_codec.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FMOD\fmod_common.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FMOD\fmod_dsp.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FMOD\fmod_dsp_effects.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FMOD\fmod_errors.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FMOD\fmod_output.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -131,7 +158,7 @@
     <ClCompile Include="Resource\Manager\ResourceManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Resource2D.cpp">
+    <ClCompile Include="Resource\Resource.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="World\Object\Object.cpp">
@@ -213,6 +240,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Helper\Math\MathF.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\AudioClip.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -8,7 +8,6 @@ Collider::Collider()
 	: isTrigger(false),
 	m_id(CollisionID++)
 {
-
 }
 
 Collider::~Collider()
@@ -22,6 +21,7 @@ void Collider::Draw(Camera2D* _camera)
 
 void Collider::OnCollisionEnter(Actor* other)
 {
+	m_color = D2D1::ColorF(D2D1::ColorF::GreenYellow);
 	for (Component*& comp : gameObject->GetComponentList(ComponentType::Script))
 	{
 		if (comp->GetType() == ComponentType::Script && comp->GetState() == GameState::Active)
@@ -33,6 +33,7 @@ void Collider::OnCollisionEnter(Actor* other)
 
 void Collider::OnCollisionStay(Actor* other)
 {
+	m_color = D2D1::ColorF(D2D1::ColorF::Red);
 	for (Component*& comp : gameObject->GetComponentList(ComponentType::Script))
 	{
 		if (comp->GetType() == ComponentType::Script && comp->GetState() == GameState::Active)
@@ -44,6 +45,7 @@ void Collider::OnCollisionStay(Actor* other)
 
 void Collider::OnCollisionExit(Actor* other)
 {
+	m_color = D2D1::ColorF(D2D1::ColorF::GreenYellow);
 	for (Component*& comp : gameObject->GetComponentList(ComponentType::Script))
 	{
 		if (comp->GetType() == ComponentType::Script && comp->GetState() == GameState::Active)

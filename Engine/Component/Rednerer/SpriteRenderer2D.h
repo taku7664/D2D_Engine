@@ -11,7 +11,6 @@ public:
 
 	virtual void Draw(Camera2D* _camera) final;
 
-	Resource::Sprite2D* sprite;
 	ID2D1Bitmap* bitmap;
 
 private: 
