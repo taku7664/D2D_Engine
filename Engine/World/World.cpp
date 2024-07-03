@@ -1,18 +1,10 @@
 #include "pch.h"
 #include "World.h"
 
-Layer* World::m_persistentLayers[(int)LayerTag::SIZE] = { nullptr };
 
 World::World()
     : m_WorldTag(WorldTag::Default)
 {
-    if (m_persistentLayers[0] == nullptr)
-    {
-        for (int i = 0; i < (int)LayerTag::SIZE; i++)
-        {
-            m_persistentLayers[i] = new Layer((LayerTag)i);
-        }
-    }
 
     for (int i = 0; i < (int)LayerTag::SIZE; i++)
     {
@@ -34,10 +26,6 @@ World::~World()
 
 void World::Release()
 {
-    for (Layer* layer : m_persistentLayers)
-    {
-        delete layer;
-    }
 }
 
 void World::FixedUpdate()
@@ -46,8 +34,6 @@ void World::FixedUpdate()
     {
         if (m_layers[i]) 
             m_layers[i]->FixedUpdate();
-        if (m_persistentLayers[i]) 
-            m_persistentLayers[i]->FixedUpdate();
     }
 }
 
@@ -57,8 +43,6 @@ void World::EarlyUpdate()
     {
         if (m_layers[i])
             m_layers[i]->EarlyUpdate();
-        if (m_persistentLayers[i])
-            m_persistentLayers[i]->EarlyUpdate();
     }
 }
 
@@ -68,8 +52,6 @@ void World::Update()
     {
         if (m_layers[i])
             m_layers[i]->Update();
-        if (m_persistentLayers[i])
-            m_persistentLayers[i]->Update();
     }
 }
 
@@ -79,8 +61,6 @@ void World::LateUpdate()
     {
         if (m_layers[i])
             m_layers[i]->LateUpdate();
-        if (m_persistentLayers[i])
-            m_persistentLayers[i]->LateUpdate();
     }
 }
 
@@ -90,8 +70,6 @@ void World::StateUpdate()
     {
         if (m_layers[i])
             m_layers[i]->StateUpdate();
-        if (m_persistentLayers[i])
-            m_persistentLayers[i]->StateUpdate();
     }
 }
 
@@ -101,7 +79,5 @@ void World::Render()
     {
         if (m_layers[i])
             m_layers[i]->Render();
-        if (m_persistentLayers[i])
-            m_persistentLayers[i]->Render();
     }
 }

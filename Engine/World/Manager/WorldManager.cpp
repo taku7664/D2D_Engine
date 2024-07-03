@@ -2,15 +2,15 @@
 #include "WorldManager.h"
 
 World*				 WorldManager::m_activeWorld = nullptr;
-std::vector<World*>  WorldManager::m_WorldList[(int)LayerTag::SIZE]{};
+std::vector<World*>  WorldManager::m_worldList[(int)LayerTag::SIZE]{};
 
 void WorldManager::Release()
 {
 	for (int i = 0; i < (int)LayerTag::SIZE; i++)
 	{
-		for (World* World : m_WorldList[i])
+		for (World* world : m_worldList[i])
 		{
-			delete World;
+			delete world;
 		}
 	}
 	World::Release();
@@ -53,15 +53,34 @@ void WorldManager::StateUpdate()
 }
 
 
-bool WorldManager::LoadWorld(World* _World)
+bool WorldManager::LoadWorld(World* _world)
 {
-	if (_World == nullptr) return false;
-	if (m_activeWorld && m_activeWorld == _World) return false;
+	if (_world == nullptr) return false;
+	if (m_activeWorld == _world) return false;
 	else
 	{
 		if (m_activeWorld)
+		{
 			m_activeWorld->WorldExit();
-		m_activeWorld = _World;
+			// Persistent객체를 옮겨준다.
+			for (int i = 0; i < (int)LayerTag::SIZE; i++)
+			{
+				std::vector<Object*>& objList = m_activeWorld->GetLayerList()[i]->GetObjectList();
+				for (auto iter = objList.begin(); iter != objList.end();)
+				{
+					if ((*iter)->IsPersistent())
+					{
+						_world->GetLayerList()[i]->GetObjectList().push_back((*iter));
+						objList.erase(iter);
+					}
+					else
+					{
+						++iter;
+					}
+				}
+			}
+		}
+		m_activeWorld = _world;
 		m_activeWorld->WorldEnter();
 		return true;
 	}
@@ -69,17 +88,7 @@ bool WorldManager::LoadWorld(World* _World)
 
 bool WorldManager::LoadWorld(std::string _key, WorldTag _tag)
 {
-	if (m_activeWorld && m_activeWorld->GetName() == _key) return false;
-	for (int i = 0; i < m_WorldList[(int)_tag].size(); i++)
-	{
-		if (m_WorldList[(int)_tag][i]->GetName() == _key)
-		{
-			if (m_activeWorld)
-				m_activeWorld->WorldExit();
-			m_activeWorld = m_WorldList[(int)_tag][i];
-			m_activeWorld->WorldEnter();
-			return true;
-		}
-	}
-	return false;
+	World* find = FindWorld(_key, _tag);
+	bool check = LoadWorld(find);
+	return check;
 }

@@ -18,16 +18,11 @@ public:
 	void OnCollisionStay(Object* other);
 	void OnCollisionExit(Object* other);
 
-	UINT32 GetID() { return m_id; }
-
 	bool isTrigger;
 
 	D2D1_VECTOR_2F offset;
 
 private:
-
-	static UINT32 m_collisionID;
-	UINT32 m_id;
 
 };
 

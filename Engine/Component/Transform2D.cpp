@@ -3,7 +3,8 @@
 #include "../World/Object/Object.h"
 
 Transform2D::Transform2D()
-	: position({ 0.f,0.f }),
+	: m_parent(nullptr),
+	position({ 0.f,0.f }),
 	rotation(0.f),
 	scale({ 1.f , 1.f }),
 	m_localMatrix(),
@@ -14,20 +15,22 @@ Transform2D::Transform2D()
 
 Transform2D::~Transform2D()
 {
+	Release();
 }
 
-void Transform2D::LateUpdate()
+void Transform2D::Update()
 {
 	m_localMatrix =
 		D2D1::Matrix3x2F::Scale(D2D1::SizeF(scale.x, scale.y)) *
 		D2D1::Matrix3x2F::Rotation(rotation) *
 		D2D1::Matrix3x2F::Translation(position.x, position.y);
+}
 
-	Object* parent = GetOwner()->GetParent();
-
-	if (parent != nullptr)
+void Transform2D::LateUpdate()
+{
+	if (m_parent != nullptr)
 	{
-		m_worldMatrix = m_localMatrix * parent->transform->m_worldMatrix;
+		m_worldMatrix = m_localMatrix * m_parent->CalculationWorldTransform();
 	}
 	else
 	{
@@ -35,17 +38,45 @@ void Transform2D::LateUpdate()
 	}
 }
 
+void Transform2D::Release()
+{
+	// 부모가 이미 있는경우 부모의 자식리스트에서 제거하고 바꿔줘야함.
+	if (m_parent)
+	{
+		for (auto child = m_parent->m_childList.begin();; ++child)
+		{
+			if ((*child) == this)
+			{
+				m_parent->m_childList.erase(child);
+				return;
+			}
+		}
+	}
+}
+
+
+D2D_MATRIX_3X2_F Transform2D::CalculationWorldTransform()
+{
+	if (m_parent)
+	{
+		return m_localMatrix * m_parent->CalculationWorldTransform();
+	}
+	else
+	{
+		return m_localMatrix;
+	}
+}
+
 D2D_VECTOR_2F Transform2D::WorldPosition()
 {
-	// 부모 오브젝트가 있을 때
 	return { m_worldMatrix.dx, m_worldMatrix.dy };
 }
 
 float Transform2D::WorldRotation()
 {
-	if (this->GetOwner()->GetParent() != nullptr)
+	if (m_parent != nullptr)
 	{
-		return this->GetOwner()->GetParent()->transform->WorldRotation() * this->rotation;
+		return this->m_parent->WorldRotation() * this->rotation;
 	}
 	else
 	{
@@ -55,9 +86,9 @@ float Transform2D::WorldRotation()
 
 D2D_VECTOR_2F Transform2D::WorldScale()
 {
-	if (this->GetOwner()->GetParent() != nullptr)
+	if (m_parent != nullptr)
 	{
-		D2D_VECTOR_2F parentScale = this->GetOwner()->GetParent()->transform->WorldScale();
+		D2D_VECTOR_2F parentScale = this->m_parent->WorldScale();
 		return { parentScale.x * this->scale.x, parentScale.y * this->scale.y };
 	}
 	else
@@ -81,6 +112,16 @@ D2D1_MATRIX_3X2_F Transform2D::ScaleMatrix(float _xScale, float _yScale)
 	return D2D1::Matrix3x2F::Scale(D2D1::SizeF(_xScale, _yScale));
 }
 
+void Transform2D::SetParent(Transform2D* _parent)
+{
+	Release();
+	m_parent = _parent;
+	if (_parent != nullptr)
+	{
+		_parent->m_childList.push_back(this);
+	}
+}
+
 void Transform2D::LookAt(Transform2D* _target)
 {
 	float angle = atan2(
@@ -88,3 +129,4 @@ void Transform2D::LookAt(Transform2D* _target)
 		_target->m_worldMatrix.dy - this->m_worldMatrix.dy);
 	this->rotation = -MathF.Radian2Degree(angle);
 }
+

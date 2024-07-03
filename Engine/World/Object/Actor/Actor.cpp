@@ -6,7 +6,6 @@ Actor::Actor(std::string _name, ObjectTag _tag)
 {
 	m_type = ObjectType::Actor;
 	m_componentList->clear();
-	m_child.clear();
 	transform = this->AddComponent<Transform2D>();
 }
 
@@ -18,10 +17,6 @@ Actor::~Actor()
 		for (Component*& comp : m_componentList[i]) {
 			delete comp;
 		}
-	}
-	// 자식오브젝트 할당 해제
-	for (Object*& child : m_child) {
-		delete child;
 	}
 }
 
@@ -35,11 +30,6 @@ void Actor::FixedUpdate()
 				comp->FixedUpdate();
 		}
 	}
-	for (Object*& child : m_child)
-	{
-		if (child->GetState() == GameState::Active)
-			child->FixedUpdate();
-	}
 }
 
 void Actor::EarlyUpdate()
@@ -51,11 +41,6 @@ void Actor::EarlyUpdate()
 			if (comp)
 				comp->EarlyUpdate();
 		}
-	}
-	for (Object*& child : m_child)
-	{
-		if (child->GetState() == GameState::Active)
-			child->EarlyUpdate();
 	}
 }
 
@@ -69,11 +54,6 @@ void Actor::Update()
 				comp->Update();
 		}
 	}
-	for (Object*& child : m_child)
-	{
-		if (child->GetState() == GameState::Active)
-			child->Update();
-	}
 }
 
 void Actor::LateUpdate()
@@ -85,11 +65,6 @@ void Actor::LateUpdate()
 			if (comp)
 				comp->LateUpdate();
 		}
-	}
-	for (Object*& child : m_child)
-	{
-		if (child->GetState() == GameState::Active)
-			child->LateUpdate();
 	}
 }
 
@@ -103,11 +78,6 @@ void Actor::Draw(Camera2D* _camera)
 				comp->Draw(_camera);
 		}
 	}
-	for (Object*& child : m_child)
-	{
-		if (child->GetState() == GameState::Active)
-			child->Draw(_camera);
-	}
 }
 
 void Actor::Render()
@@ -120,19 +90,6 @@ void Actor::Render()
 				comp->Render();
 		}
 	}
-	for (Object*& child : m_child)
-	{
-		if (child->GetState() == GameState::Active)
-			child->Render();
-	}
-}
-
-Actor* Actor::CreateChild(std::string _name, ObjectTag _tag)
-{
-	Actor* child = new Actor(_name, _tag);
-	child->SetParent(this);
-	m_child.push_back(child);
-	return child;
 }
 
 void Actor::SetActive(bool _val)
@@ -159,13 +116,6 @@ void Actor::SetDestroy()
 
 void Actor::CallOnEnalbe()
 {
-	// Active상태인 자식들 전부 OnEnable함수를 호출 
-	for (Object*& child : m_child)
-	{
-		Actor* actor = dynamic_cast<Actor*>(child);
-		if (actor && actor->GetState() == GameState::Active)
-			actor->CallOnEnalbe();
-	}
 	for (Component*& comp : m_componentList[(int)ComponentType::Script])
 	{
 		if (comp->GetState() == GameState::Active)
@@ -175,13 +125,6 @@ void Actor::CallOnEnalbe()
 
 void Actor::CallOnDisalbe()
 {
-	// CallOnEnalbe과 똑같이 작동. (Passive상태인 애들은 냅두는게 맞는듯?)
-	for (Object*& child : m_child)
-	{
-		Actor* actor = dynamic_cast<Actor*>(child);
-		if (actor && child->GetState() == GameState::Active)
-			actor->CallOnDisalbe();
-	}
 	for (Component*& comp : m_componentList[(int)ComponentType::Script])
 	{
 		if (comp->GetState() == GameState::Active)
@@ -191,13 +134,6 @@ void Actor::CallOnDisalbe()
 
 void Actor::CallOnDestroy()
 {
-	// 자식들 중에 이미 Destroy된 것은 OnDestroy가 호출 되었을 것이므로 Destroy상태가 아닌것만 호출
-	for (Object*& child : m_child)
-	{
-		Actor* actor = dynamic_cast<Actor*>(child);
-		if (actor && child->GetState() != GameState::Destroy)
-			actor->CallOnDestroy();
-	}
 	for (Component*& comp : m_componentList[(int)ComponentType::Script])
 	{
 		if (comp->GetState() == GameState::Active)

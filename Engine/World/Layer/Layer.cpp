@@ -9,7 +9,7 @@ Layer::Layer(LayerTag _type)
 Layer::~Layer()
 {
 	// 오브젝트 할당 해제
-	for (Object*& obj : m_objectList) {
+	for (Object* obj : m_objectList) {
 		delete obj;
 	}
 }
@@ -88,17 +88,6 @@ void Layer::ProcessDestroy(std::vector<Object*>& _objList)
 		}
 		else
 		{
-			// Actor클래스면 자식검사도 해봐야한다
-			Actor* actor = dynamic_cast<Actor*>(*iter);
-			if ((*iter)->GetType() == ObjectType::Actor)
-			{
-
-			}
-			if (actor && !actor->GetChild().empty())
-			{
-				// 재귀로 자식의 자식 접근
-				ProcessDestroy(actor->GetChild());
-			}
 			++iter;
 		}
 	}

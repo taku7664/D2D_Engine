@@ -36,13 +36,11 @@ void CollisionManager::MergeCollisionLayer()
 		{
 			tempLayer.push_back(WorldManager::GetActiveWorld()->GetLayerList()[i]);
 			objectCount += tempLayer.back()->GetObjectList().size(); // 오브젝트 수 누적
-			tempLayer.push_back(WorldManager::GetActiveWorld()->GetPersistentLayers()[i]);
-			objectCount += tempLayer.back()->GetObjectList().size(); // 22
 		}
 	}
 }
 
-void CollisionManager::CheckInteraction(Actor* _left, Actor* _right)
+void CollisionManager::CheckCollision(Actor* _left, Actor* _right)
 {
 
 	collisionCount++; // 그냥 충돌체크를 몇번하는지 누적
@@ -107,40 +105,10 @@ void CollisionManager::IterateCollisionLayer()
 						Actor* right = dynamic_cast<Actor*>((*_right));
 						if (right)
 						{
-							// 충돌체크를 해본다.
-							CheckCollisions(left, right);
+							CheckCollision(left, right);
+							Debug.Log(std::to_string(collisionCount) + (collisionCount >= 10 ? "" : " ") +
+								"st CollisionCheck    " + left->GetName() + " : " + right->GetName());
 						}
-					}
-				}
-			}
-		}
-	}
-}
-
-void CollisionManager::CheckCollisions(Actor* _left, Actor* _right)
-{
-	// 아니 이러면 생각해보니까 안대잔슴 자식도 최상위 오브젝트를 검사해야대니까
-	CheckInteraction(_left, _right);
-	Debug.Log(std::to_string(collisionCount) + (collisionCount >= 10 ? "" : " ") + "st CollisionCheck    " + _left->GetName() + " : " + _right->GetName());
-
-	// _left의 자식들과 _right의 자식들을 비교하여 충돌 검사를 수행
-	const std::vector<Object*> tempList = Utillity.MergeVectors(_left->GetChild(), _right->GetChild());
-
-	if (!tempList.empty())
-	{
-		objectCount += tempList.size();
-		for (int i = 0; i < tempList.size(); i++)
-		{
-			Actor* leftChild = dynamic_cast<Actor*>(tempList[i]);
-			if (leftChild)
-			{
-				for (int j = i + 1; j < tempList.size(); j++)
-				{
-					Actor* rightChild = dynamic_cast<Actor*>(tempList[j]);
-					if (rightChild)
-					{
-						CheckInteraction(leftChild, rightChild);
-						Debug.Log(std::to_string(collisionCount) + (collisionCount >= 10 ? "" : " ") + "st CollisionCheck    " + leftChild->GetName() + " : " + rightChild->GetName());
 					}
 				}
 			}

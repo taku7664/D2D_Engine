@@ -48,13 +48,11 @@ void Camera2D::Render()
     {
         if (!m_cullingLayer[i])
         {
-            // 레이어를 정렬할 수 있으므로 혹시 몰라 레이어 복사병합
-            std::vector<Object*> tempList = Utillity.MergeVectors(activeWorld->GetLayerList()[i]->GetObjectList(), activeWorld->GetPersistentLayers()[i]->GetObjectList());
-            for (Object*& obj : tempList)
+            for (Object*& obj : activeWorld->GetLayerList()[i]->GetObjectList())
             {
                 if (!m_cullingTag[(int)obj->GetTag()])
                 {
-                    if (obj->GetTag() != ObjectTag::Camera || obj == GetOwner())
+                    if (obj->GetTag() != ObjectTag::Camera || obj == gameObject)
                         obj->Draw(this);
                 }
             }
@@ -85,7 +83,7 @@ D2D1_MATRIX_3X2_F Camera2D::CameraMatrix()
     cameraMatrix = 
         Transform2D::TranslateMatrix(
         (-res.width) / 2, (-res.height) / 2) * // 중심축 이동
-        GetOwner()->transform->GetWorldMatrix() *  // 행렬 연산
+        gameObject->transform->GetWorldMatrix() *  // 행렬 연산
         Transform2D::TranslateMatrix(
             (res.width) / 2, (res.height) / 2); // 원상태로 복귀
 

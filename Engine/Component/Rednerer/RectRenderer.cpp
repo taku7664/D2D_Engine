@@ -25,7 +25,7 @@ void RectRenderer::Draw(Camera2D* _camera)
 	ID2D1SolidColorBrush* brush = D2DRender::GetBrush();
 	D2D1_COLOR_F oldColor = brush->GetColor(); // 기존 색상 저장
 
-	Transform2D* tr = m_owner->transform;
+	Transform2D* tr = gameObject->transform;
 	if (!tr) assert("transform is Nullptr");
 
 	D2D1_VECTOR_2F center = { size.width / 2 + offset.x , size.height / 2 + offset.y }; 

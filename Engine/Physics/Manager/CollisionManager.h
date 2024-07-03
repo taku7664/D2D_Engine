@@ -20,7 +20,7 @@ private:
 
 	static void MergeCollisionLayer();
 	static void IterateCollisionLayer();
-	static void CheckCollisions(Actor* _left, Actor* _right);
-	static void CheckInteraction(Actor* _left, Actor* _right);
+	static void CheckCollision(Actor* _left, Actor* _right);
+
 	static bool AABB(BoxCollider2D* left, BoxCollider2D* _right);
 };

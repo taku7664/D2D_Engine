@@ -17,7 +17,7 @@ void SpriteRenderer2D::Draw(Camera2D* _camera)
 {
 	ID2D1BitmapRenderTarget* renderTarget = _camera->GetBitmapRenderTarget();
 
-	Transform2D* tr = m_owner->transform;
+	Transform2D* tr = gameObject->transform;
 	if (!tr) assert("Transform is Nullptr");
 
 	size = bitmap->GetSize();

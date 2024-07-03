@@ -6,9 +6,8 @@ class Object;
 class Component abstract
 {
 public:
-	void			SetOwner(Object* _owner) { m_owner = _owner; }
+	virtual			~Component() {}
 	void			SetState(GameState _state) { m_state = _state; }
-	Object*		    GetOwner() { return m_owner; }
 	ComponentType	GetType() { return m_type; }
 	GameState		GetState() { return m_state; }
 
@@ -20,9 +19,10 @@ public:
 	virtual void	Draw(Camera2D* _camera) {}
 	virtual void	Render() {}
 
+	Object* gameObject; // 자신을 소유한 오브젝트 (const로 바꿀 방법을 찾자)
+
 protected:
 
-	Object*         m_owner;
 	ComponentType  	m_type;
 	GameState	    m_state = GameState::Active;
 

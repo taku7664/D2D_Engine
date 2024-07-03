@@ -30,13 +30,13 @@ public:
 	void Draw(Camera2D* _camera);
 	void Render();
 
-	Actor* CreateChild(std::string _name, ObjectTag _tag = ObjectTag::Defalut);
+	std::vector<Component*>& GetComponentList(ComponentType _type) { return m_componentList[(int)_type]; }
 
 	template <typename T>
 	T* AddComponent()
 	{
 		T* temp = new T();
-		temp->SetOwner(this);
+		temp->gameObject = this;
 		temp->Initialize();
 		ComponentType type = temp->GetType();
 		m_componentList[(int)type].push_back(temp);
@@ -59,17 +59,12 @@ public:
 		}
 		return nullptr;
 	}
+
 	void		SetActive(bool _val);
 	void		SetDestroy();
-	std::vector<Object*>& GetChild() { return m_child; };
-	std::vector<Component*>& GetComponentList(ComponentType _type) { return m_componentList[(int)_type]; }
-	Actor* GetParent() { return m_parent; }
-
+	
 private:
 	std::vector<Component*> m_componentList[(int)ComponentType::SIZE];
-
-	Actor* m_parent;			 // 부모 Actor
-	std::vector<Object*> m_child; // 자식 Actor
 
 	void CallOnEnalbe();
 	void CallOnDisalbe();

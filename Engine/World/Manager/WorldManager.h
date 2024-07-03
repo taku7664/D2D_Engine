@@ -18,23 +18,23 @@ public:
 	template <typename T>
 	static T* CreateWorld(std::string _key, WorldTag _tag)
 	{
-		T* _World = new T();
-		_World->SetName(_key);
-		_World->SetTag(_tag);
-		_World->WorldLoad();
-		m_WorldList[(int)_tag].push_back(_World);
-		if (!m_activeWorld) m_activeWorld = _World;
-		return _World;
+		T* _world = new T();
+		_world->SetName(_key);
+		_world->SetTag(_tag);
+		_world->WorldLoad();
+		m_worldList[(int)_tag].push_back(_world);
+		if (!m_activeWorld) m_activeWorld = _world;
+		return _world;
 	}
 	// World을 검색합니다.
 	static World* FindWorld(std::string _key, WorldTag _tag = WorldTag::Default)
 	{
 		for (int i = (int)_tag; i < (int)WorldTag::SIZE; i++)
 		{
-			for (int j = 0; j < m_WorldList[i].size(); j++)
+			for (int j = 0; j < m_worldList[i].size(); j++)
 			{
-				if (m_WorldList[i][j]->GetName() == _key)
-					return m_WorldList[i][j];
+				if (m_worldList[i][j]->GetName() == _key)
+					return m_worldList[i][j];
 			}
 		}
 		return nullptr;
@@ -44,29 +44,30 @@ public:
 	{
 		for (int i = (int)_tag; i < (int)WorldTag::SIZE; i++)
 		{
-			for (int j = 0; j < m_WorldList[i].size(); j++)
+			for (int j = 0; j < m_worldList[i].size(); j++)
 			{
-				if (m_WorldList[i][j]->GetName() == _key)
+				if (m_worldList[i][j]->GetName() == _key)
 				{
-					m_WorldList[i][j]->WorldDestroy();
-					delete m_WorldList[i][j];
-					m_WorldList[i].erase(m_WorldList->begin() + j);
-					return m_WorldList[i][j];
+					m_worldList[i][j]->WorldDestroy();
+					delete m_worldList[i][j];
+					m_worldList[i].erase(m_worldList->begin() + j);
+					return m_worldList[i][j];
 				}
 			}
 		}
 		return false;
 	}
 
-	static bool LoadWorld(World* _World);
+	static bool LoadWorld(World* _world);
 	static bool LoadWorld(std::string _key, WorldTag _tag = WorldTag::Default);
 
 	static World* GetActiveWorld() { return m_activeWorld; }
-	static std::vector<World*>& GetWorldList(WorldTag _tag) { return m_WorldList[(int)_tag]; }
+	static std::vector<World*>& GetWorldList(WorldTag _tag) { return m_worldList[(int)_tag]; }
 
 private:
 
 	static World* m_activeWorld;
-	static std::vector<World*> m_WorldList[(int)LayerTag::SIZE];
+	static std::vector<World*> m_worldList[(int)LayerTag::SIZE];
+
 };
 

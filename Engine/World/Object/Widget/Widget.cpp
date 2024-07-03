@@ -5,7 +5,7 @@ Widget::Widget(std::string _name, ObjectTag _tag)
 	: Object(_name, _tag)
 {
 	transform = new Transform2D();
-	transform->SetOwner(this);
+	transform->gameObject = this;
 }
 
 Widget::~Widget()

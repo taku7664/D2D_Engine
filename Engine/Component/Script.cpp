@@ -4,7 +4,6 @@
 
 Script::Script()
 {
-	gameobject = nullptr;
 	m_type = ComponentType::Script;
 }
 
@@ -12,7 +11,8 @@ Script::~Script()
 {
 }
 
-void Script::Destroy(Object* _World)
+void Script::Destroy(Object* _object)
 {
-	_World->SetState(GameState::Destroy);
+	_object->SetDestroy();
 }
+
