@@ -143,14 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="FMOD\fmod.h" />
-    <ClInclude Include="FMOD\fmod.hpp" />
-    <ClInclude Include="FMOD\fmod_codec.h" />
-    <ClInclude Include="FMOD\fmod_common.h" />
-    <ClInclude Include="FMOD\fmod_dsp.h" />
-    <ClInclude Include="FMOD\fmod_dsp_effects.h" />
-    <ClInclude Include="FMOD\fmod_errors.h" />
-    <ClInclude Include="FMOD\fmod_output.h" />
+    <ClInclude Include="Library\FMOD\fmod.h" />
+    <ClInclude Include="Library\FMOD\fmod.hpp" />
+    <ClInclude Include="Library\FMOD\fmod_codec.h" />
+    <ClInclude Include="Library\FMOD\fmod_common.h" />
+    <ClInclude Include="Library\FMOD\fmod_dsp.h" />
+    <ClInclude Include="Library\FMOD\fmod_dsp_effects.h" />
+    <ClInclude Include="Library\FMOD\fmod_errors.h" />
+    <ClInclude Include="Library\FMOD\fmod_output.h" />
     <ClInclude Include="Resource\AudioClip.h" />
     <ClInclude Include="Physics\Manager\CollisionManager.h" />
     <ClInclude Include="Component\Collider\BoxCollider2D.h" />

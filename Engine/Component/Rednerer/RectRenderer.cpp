@@ -19,12 +19,8 @@ RectRenderer::~RectRenderer()
 {
 }
 
-void RectRenderer::Draw(Camera2D* _camera)
+bool RectRenderer::Draw(Camera2D* _camera)
 {
-	ID2D1BitmapRenderTarget* renderTarget = _camera->GetBitmapRenderTarget();
-	ID2D1SolidColorBrush* brush = D2DRender::GetBrush();
-	D2D1_COLOR_F oldColor = brush->GetColor(); // 기존 색상 저장
-
 	Transform2D* tr = gameObject->transform;
 	if (!tr) assert("transform is Nullptr");
 
@@ -36,6 +32,10 @@ void RectRenderer::Draw(Camera2D* _camera)
 		tr->GetWorldMatrix() * // 월드 변환 적용
 		Transform2D::TranslateMatrix(center.x, center.y) * // 다시 원래 위치로 이동
 		_camera->CameraMatrix(); // 최종적으로 카메라 변환 적용
+
+	ID2D1BitmapRenderTarget* renderTarget = _camera->GetBitmapRenderTarget();
+	ID2D1SolidColorBrush* brush = D2DRender::GetBrush();
+	D2D1_COLOR_F oldColor = brush->GetColor(); // 기존 색상 저장
 
 	renderTarget->SetTransform(transform);
 
@@ -51,16 +51,13 @@ void RectRenderer::Draw(Camera2D* _camera)
 	{
 		brush->SetColor(m_linecolor);
 		renderTarget->DrawRectangle(rect, brush);
-		// 외곽선이 scale값에 따라 증가해버려서 직접 scale의 x, y값만큼 나눠줌
-		//renderTarget->DrawLine(D2D1::Point2F(rect.left, rect.top), D2D1::Point2F(rect.right, rect.top), brush, lineWidth / tr->WorldScale().y); // 상
-		//renderTarget->DrawLine(D2D1::Point2F(rect.left, rect.bottom), D2D1::Point2F(rect.right, rect.bottom), brush, lineWidth / tr->WorldScale().y); // 하
-		//renderTarget->DrawLine(D2D1::Point2F(rect.left, rect.top), D2D1::Point2F(rect.left, rect.bottom), brush, lineWidth / tr->WorldScale().x); // 좌
-		//renderTarget->DrawLine(D2D1::Point2F(rect.right, rect.top), D2D1::Point2F(rect.right, rect.bottom), brush, lineWidth / tr->WorldScale().x); // 우
 	}
 
 	renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 	brush->SetColor(oldColor); // 기존 색상 돌려놓기
+
+	return true;
 }
 
 void RectRenderer::SetLineColor(D2D1_COLOR_F _color)

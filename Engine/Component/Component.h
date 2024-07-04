@@ -17,7 +17,7 @@ public:
 	virtual void	FixedUpdate() {}
 	virtual void	EarlyUpdate() {}
 	virtual void    LateUpdate() {}
-	virtual void	Draw(Camera2D* _camera) {}
+	virtual bool	Draw(Camera2D* _camera) { return false; }
 	virtual void	Render() {}
 
 	Actor* gameObject = nullptr; // 자신을 소유한 오브젝트 (const로 바꿀 방법을 찾자)

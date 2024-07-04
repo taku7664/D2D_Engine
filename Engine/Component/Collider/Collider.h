@@ -11,7 +11,7 @@ public:
 	Collider();
 	~Collider();
 
-	virtual void Draw(Camera2D* _camera);
+	virtual bool Draw(Camera2D* _camera) { return false; }
 
 	void OnCollisionEnter(Actor* other);
 	void OnCollisionStay(Actor* other);

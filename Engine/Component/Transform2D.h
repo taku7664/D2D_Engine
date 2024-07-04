@@ -17,13 +17,14 @@ public:
 	virtual void			 LateUpdate() final;
 	void                     Release();
 
-	Vector2			 WorldPosition();
+	Vector2					 WorldPosition();
 	float					 WorldRotation();
-	Vector2			 WorldScale();
+	Vector2					 WorldScale();
 	D2D1_MATRIX_3X2_F		 GetLocalMatrix() { return m_localMatrix; }
 	D2D1_MATRIX_3X2_F		 GetWorldMatrix() { return m_worldMatrix; }
 	void					 SetParent(Transform2D* _parent);
 	Transform2D*			 GetParent() { return m_parent; }
+	Transform2D*			 GetChild(int _index) { return m_childList[_index]; }
 	void					 LookAt(Transform2D* _target);
 
 	static D2D1_MATRIX_3X2_F TranslateMatrix(float _x, float _y);

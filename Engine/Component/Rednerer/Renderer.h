@@ -8,7 +8,7 @@ public:
 	Renderer() = default;
 	~Renderer() = default;
 
-	virtual void Draw(Camera2D* _camera) {}
+	virtual bool Draw(Camera2D* _camera) { return false; }
 
 	D2D1_SIZE_F size = { 0,0 };
 	Vector2 offset = { 0,0 };

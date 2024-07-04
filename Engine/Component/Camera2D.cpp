@@ -74,18 +74,15 @@ void Camera2D::Render()
 
 D2D1_MATRIX_3X2_F Camera2D::CameraMatrix()
 {
-    D2D1_MATRIX_3X2_F cameraMatrix;
+    D2D1_MATRIX_3X2_F cameraMatrix = gameObject->transform->GetWorldMatrix();
+    D2D1InvertMatrix(&cameraMatrix);
     RECT rc;
-
     GetClientRect(D2DRender::GetHWND(), &rc);
     D2D_SIZE_F res = { rc.right - rc.left, rc.bottom - rc.top };
 
-    cameraMatrix = 
-        Transform2D::TranslateMatrix(
-        (-res.width) / 2, (-res.height) / 2) * // 중심축 이동
-        gameObject->transform->GetWorldMatrix() *  // 행렬 연산
-        Transform2D::TranslateMatrix(
-            (res.width) / 2, (res.height) / 2); // 원상태로 복귀
-
+    cameraMatrix =
+        Transform2D::TranslateMatrix((-res.width) / 2, (-res.height) / 2) *
+        cameraMatrix *
+        Transform2D::TranslateMatrix((res.width) / 2, (res.height) / 2);
     return cameraMatrix;
 }

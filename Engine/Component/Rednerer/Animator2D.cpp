@@ -45,13 +45,12 @@ void Animator2D::Update()
 	}
 }
 
-void Animator2D::Draw(Camera2D* _camera)
+ bool Animator2D::Draw(Camera2D* _camera)
 {
-	ID2D1BitmapRenderTarget* renderTarget = _camera->GetBitmapRenderTarget();
 	Transform2D* tr = gameObject->transform;
-
-	if (m_activeAnimation == nullptr)
-		return;
+	Vector2 cameraTr = _camera->gameObject->transform->position;
+	if (!tr) assert("Transform is Nullptr");
+	if (!m_activeAnimation) return false;
 
 	size = m_activeAnimation->GetSprite(m_activeAnimation->GetFrameData()[currentFrame].index)->GetSize();
 	Vector2 center = { (size.width / 2) + offset.x, (size.height / 2) + offset.y }; // offset이 과연 중심축을 잘 옮겨줄까? 에 대한 테스트가 필요함 <- 잘된다!
@@ -63,6 +62,8 @@ void Animator2D::Draw(Camera2D* _camera)
 		Transform2D::TranslateMatrix(center.x, center.y) *   // 다시 원래 위치로 이동
 		_camera->CameraMatrix();							 // 최종적으로 카메라 변환 적용
 
+	ID2D1BitmapRenderTarget* renderTarget = _camera->GetBitmapRenderTarget();
+
 	renderTarget->SetTransform(transform);
 
 	renderTarget->DrawBitmap(
@@ -73,6 +74,8 @@ void Animator2D::Draw(Camera2D* _camera)
 	renderTarget->DrawEllipse(ellipse, D2DRender::GetBrush(), 3.f);
 
 	renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+
+	return true;
 }
 
 void Animator2D::AddAnimation(std::string _key, Resource::Animation2D* _ani)

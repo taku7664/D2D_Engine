@@ -10,7 +10,7 @@ public:
 	RectRenderer();
 	~RectRenderer();
 
-	virtual void Draw(Camera2D* _camera) final;
+	virtual bool Draw(Camera2D* _camera) final;
 
 	void SetLineColor(D2D1_COLOR_F _color);
 	void SetFillColor(D2D1_COLOR_F _color);

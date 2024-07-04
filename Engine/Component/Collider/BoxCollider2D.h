@@ -9,7 +9,7 @@ public:
 	BoxCollider2D();
 	~BoxCollider2D();
 
-	virtual void Draw(Camera2D* _camera) final;
+	virtual bool Draw(Camera2D* _camera) final;
 
 	D2D1_SIZE_F size;
 

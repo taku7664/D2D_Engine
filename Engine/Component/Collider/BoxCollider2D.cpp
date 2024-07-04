@@ -14,7 +14,7 @@ BoxCollider2D::~BoxCollider2D()
 
 }
 
-void BoxCollider2D::Draw(Camera2D* _camera)
+bool BoxCollider2D::Draw(Camera2D* _camera)
 {
 	if (true)
 	{
@@ -39,7 +39,7 @@ void BoxCollider2D::Draw(Camera2D* _camera)
 
 		// 외곽선 출력
 		brush->SetColor(m_color);
-		renderTarget->DrawRectangle(rect, brush);
+		renderTarget->DrawRectangle(rect, brush, 0.5f);
 		// 중심점 출력
 		Vector2 center = { size.width / 2 , size.height / 2 };
 		D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2F(center.x, center.y), 3.f, 3.f);
@@ -48,5 +48,7 @@ void BoxCollider2D::Draw(Camera2D* _camera)
 		renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 		brush->SetColor(oldColor); // 기존 색상 돌려놓기
+		return true;
 	}
+	return false;
 }

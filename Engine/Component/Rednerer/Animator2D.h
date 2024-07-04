@@ -11,7 +11,7 @@ public:
 	~Animator2D();
 
 	virtual void Update() final;
-	virtual void Draw(Camera2D* _camera) final;
+	virtual bool Draw(Camera2D* _camera) final;
 
 	void AddAnimation(std::string _key, Resource::Animation2D* _ani);
 	Resource::Animation2D* FindAnimation(const std::string& _key);

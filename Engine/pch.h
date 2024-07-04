@@ -14,13 +14,21 @@
 #include <cmath>
 #include <algorithm>
 
+//Direct2D
 #include <d2d1.h>
 #include <dwrite.h>
+#pragma comment(lib, "d2d1.lib")
+#pragma comment(lib, "dwrite.lib")
 #include <d2d1_1helper.h>
-#pragma comment(lib, "d2d1")
-#pragma comment(lib, "dwrite")
 #include <wincodec.h>
 #include <comdef.h>
+
+// Fmod
+#include "Library/FMOD/Include/fmod.hpp"
+#include "Library/FMOD/Include/fmod_studio.hpp"
+#include "Library/FMOD/Include/fmod_common.h"
+#include "Library/FMOD/Include/fmod_codec.h"
+//#pragma comment (lib, "Library/FMOD/Include/fmod_vc.lib")
 
 #include "Helper/CommonEnum.h"
 #include "Helper/Math/MathF.h"

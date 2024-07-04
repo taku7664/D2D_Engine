@@ -14,12 +14,13 @@ SpriteRenderer2D::~SpriteRenderer2D()
 {
 }
 
-void SpriteRenderer2D::Draw(Camera2D* _camera)
+bool SpriteRenderer2D::Draw(Camera2D* _camera)
 {
 	ID2D1BitmapRenderTarget* renderTarget = _camera->GetBitmapRenderTarget();
 
 	Transform2D* tr = gameObject->transform;
 	if (!tr) assert("Transform is Nullptr");
+	if (!bitmap) assert(false);
 
 	size = bitmap->GetSize();
 	Vector2 center = { size.width / 2 + offset.x , size.height / 2 + offset.y }; // offset이 과연 중심축과 같이 움직이는게 맞을까?
@@ -36,4 +37,6 @@ void SpriteRenderer2D::Draw(Camera2D* _camera)
 	renderTarget->DrawBitmap(bitmap, { 0, 0, size.width, size.height }, alpha);
 
 	renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+
+	return true;
 }

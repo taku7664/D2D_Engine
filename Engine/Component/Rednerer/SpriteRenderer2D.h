@@ -9,7 +9,7 @@ public:
 	SpriteRenderer2D();
 	~SpriteRenderer2D();
 
-	virtual void Draw(Camera2D* _camera) final;
+	virtual bool Draw(Camera2D* _camera) final;
 
 	ID2D1Bitmap* bitmap;
 
